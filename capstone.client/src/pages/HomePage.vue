@@ -168,7 +168,6 @@ export default {
       goal: computed(() => AppState.newGoal),
       createGoal(newGoal) {
         goalService.createGoal(state.newGoal)
-        console.log(state.newGoal)
         // state.newGoal.title = ''
         // state.newGoal.category = ''
       },

@@ -5,8 +5,9 @@ import { api } from './AxiosService'
 class GoalService {
   async getGoals() {
     try {
-      const res = await api.get('/goals')
+      const res = await api.get('/api/goals')
       AppState.goals = res.data
+      console.log(res.data)
     } catch (error) {
       logger.error(error)
     }
@@ -14,8 +15,9 @@ class GoalService {
 
   async createGoal(newGoal) {
     try {
-      // const res = await api.post('/goals', newGoal)
-      // AppState.goals = res.data
+      const res = await api.post('/api/goals', newGoal)
+      AppState.goals = res.data
+      this.getGoals()
     } catch (error) {
       logger.error(error)
     }
