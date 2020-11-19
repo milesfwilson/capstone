@@ -8,7 +8,7 @@ const Goal = new Schema(
     challengeId: { type: ObjectId, ref: 'Challenge', required: false },
     title: { type: String, required: true },
     category: { type: String, required: true },
-    frequency: { type: Number, required: false },
+    counter: { type: Number, required: false },
     progress: { type: Number, default: 0, required: true },
     completed: { type: Boolean, default: false },
     participantId: { type: String, required: false },
