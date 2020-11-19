@@ -1,13 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <img
-          alt="logo"
-          src="../assets/img/cw-logo.png"
-          height="45"
-        />
-      </div>
+      <h3>Capstone</h3>
     </router-link>
     <button
       class="navbar-toggler"
@@ -35,7 +29,7 @@
       </ul>
       <span class="navbar-text">
         <button
-          class="btn btn-outline-primary text-uppercase"
+          class="btn text-uppercase"
           @click="login"
           v-if="!user.isAuthenticated"
         >
@@ -50,10 +44,9 @@
             <img
               :src="user.picture"
               alt="user photo"
-              height="40"
-              class="rounded"
+              height="50"
+              class="rounded-circle"
             />
-            <span class="mx-3">{{ user.name }}</span>
           </div>
           <div
             class="dropdown-menu p-0 list-group w-100"
@@ -69,7 +62,7 @@
               class="list-group-item list-group-item-action hoverable"
               @click="logout"
             >
-              logout
+              Logout
             </div>
           </div>
         </div>
@@ -122,6 +115,6 @@ a:hover {
   text-transform: uppercase;
 }
 .nav-item .nav-link.router-link-exact-active{
-  color: var(--primary);
+  color: var(--light);
 }
 </style>
