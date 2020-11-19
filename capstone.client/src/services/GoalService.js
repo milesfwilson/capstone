@@ -14,8 +14,8 @@ class GoalService {
 
   async createGoal(newGoal) {
     try {
-      const res = await api.post('/goals', newGoal)
-      AppState.goals = res.data
+      // const res = await api.post('/goals', newGoal)
+      // AppState.goals = res.data
     } catch (error) {
       logger.error(error)
     }
