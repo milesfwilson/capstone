@@ -88,5 +88,12 @@ class ProfileService {
     )
     return profile
   }
+
+  async editProfile(body, id) {
+    return await dbContext.Profile.findOneAndUpdate(
+      { _id: id },
+      { $set: body },
+      { new: true })
+  }
 }
 export const profilesService = new ProfileService()

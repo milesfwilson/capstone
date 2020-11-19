@@ -14,24 +14,26 @@ class ChallengeService {
     return await dbContext.Challenges.create(body)
   }
 
-  async deleteChallenge(challengeId) {
-    // const exists = await dbContext.Challenges.findById(challengeId)
-    // if (!exists) {
-    //   throw new BadRequest('This challenge does not exist')
-    // // @ts-ignore
-    // } else if (exists._doc.creatorId === userId) {
-    await dbContext.Challenges.findByIdAndDelete(challengeId)
-    return 'Your Challenge has been delorted!'
+  async deleteChallenge(challengeId, userId) {
+    const exists = await dbContext.Challenges.findById(challengeId)
+    if (!exists) {
+      throw new BadRequest('This challenge does not exist')
+    // @ts-ignore
+    } else if (exists._doc.creatorId === userId) {
+      await dbContext.Challenges.findByIdAndDelete(challengeId)
+      return 'Your Challenge has been delorted!'
+    }
   }
 
-  async edit(challengeId, newChallenge) {
-    // const exists = await dbContext.Challenges.findById(challengeId)
-    // if (!exists) {
-    //   throw new BadRequest('This challenge does not exist')
-    // // @ts-ignore
-    // } else if (exists._doc.creatorId === userId) {
-    await dbContext.Challenges.findByIdAndUpdate(challengeId, newChallenge)
-    return 'YOUR BOARD HAS BEEN EDITED!'
+  async edit(challengeId, newChallenge, userId) {
+    const exists = await dbContext.Challenges.findById(challengeId)
+    if (!exists) {
+      throw new BadRequest('This challenge does not exist')
+    // @ts-ignore
+    } else if (exists._doc.creatorId === userId) {
+      await dbContext.Challenges.findByIdAndUpdate(challengeId, newChallenge)
+      return 'YOUR BOARD HAS BEEN EDITED!'
+    }
   }
 }
 
