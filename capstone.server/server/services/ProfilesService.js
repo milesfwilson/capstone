@@ -57,6 +57,10 @@ class ProfileService {
     return profiles
   }
 
+  async getPlayer(userId) {
+    await dbContext.Player.findById(userId)
+  }
+
   /**
    * Returns a user profile from the Auth0 user object
    *

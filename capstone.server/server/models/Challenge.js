@@ -5,17 +5,21 @@ const Schema = mongoose.Schema
 const Challenge = new Schema(
   {
     title: { type: String, required: true },
+    creatorId: { type: String, required: true },
+    participantId: { type: String, required: false }
+    // wager: { type: String, required: true },
+
   },
 
   { timestamps: true, toJSON: { virtuals: true } }
 
 )
 
-// Challenge.virtual('creator', {
-//   localField: 'creatorId',
-//   ref: 'Profile',
-//   foreignField: '_id',
-//   justOne: true
-// })
+Challenge.virtual('creator', {
+  localField: 'creatorId',
+  ref: 'Profile',
+  foreignField: '_id',
+  justOne: true
+})
 
 export default Challenge
