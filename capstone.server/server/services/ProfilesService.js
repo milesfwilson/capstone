@@ -57,10 +57,6 @@ class ProfileService {
     return profiles
   }
 
-  async getPlayer(userId) {
-    await dbContext.Player.findById(userId)
-  }
-
   /**
    * Returns a user profile from the Auth0 user object
    *
@@ -91,6 +87,13 @@ class ProfileService {
       { runValidators: true, setDefaultsOnInsert: true, new: true }
     )
     return profile
+  }
+
+  async editProfile(body, id) {
+    return await dbContext.Profile.findOneAndUpdate(
+      { _id: id },
+      { $set: body },
+      { new: true })
   }
 }
 export const profilesService = new ProfileService()
