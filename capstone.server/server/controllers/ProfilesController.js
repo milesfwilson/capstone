@@ -9,7 +9,8 @@ export class ProfilesController extends BaseController {
     super('profile')
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
-      .get('', this.getUserProfile)
+      .get('/all', this.getAllProfiles)
+      .get('/', this.getUserProfile)
       .put('/:profileId', this.editProfile)
   }
 
@@ -50,6 +51,14 @@ export class ProfilesController extends BaseController {
       }
       // @ts-ignore
       res.send(await profilesService.editProfile(editedProfile, original._doc._id))
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+
+  async getAllProfiles(req, res, next) {
+    try {
+      res.send(await profilesService.getProfiles())
     } catch (error) {
       logger.error(error)
     }

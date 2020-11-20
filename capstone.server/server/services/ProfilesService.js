@@ -50,12 +50,19 @@ class ProfileService {
    * Provided an array of user ids will return an array of user profiles with email picture and name
    * @param {String[]} ids Array of email addresses to lookup users by
    */
-  async getProfiles(ids = []) {
-    const profiles = await dbContext.Profile.find({
-      _id: { $in: ids }
-    }).select('email picture name')
+  // async getProfiles(ids = []) {
+  //   const profiles = await dbContext.Profile.find({
+  //     _id: { $in: ids }
+  //   }).select('email picture name')
+  //   return profiles
+  // }
+
+  async getProfiles(query = {}) {
+    const profiles = await dbContext.Profile.find(query)
     return profiles
   }
+
+
 
   /**
    * Returns a user profile from the Auth0 user object
