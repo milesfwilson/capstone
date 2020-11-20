@@ -9,5 +9,7 @@ export const AppState = reactive({
     recurring: false,
     counter: false,
     challenge: false
-  }
+  },
+  challenges: [],
+  activeChallenge: {}
 })
