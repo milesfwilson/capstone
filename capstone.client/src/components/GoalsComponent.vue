@@ -1,5 +1,5 @@
 <template>
-  <div class="GoalsComponent container-fluid">
+  <div class="GoalsComponent">
     <div class="col-12">
       <div class="p-2 m-2 bg-dark text-light rounded">
         <goalComponent v-for="goal in goals" :goal-props="goal" :key="goal.id" class="row" />

@@ -3,6 +3,7 @@ import { AppState } from '../AppState'
 import { audience, clientId, domain } from '../AuthConfig'
 import router from '../router'
 import { setBearer } from './AxiosService'
+import { challengeService } from './ChallengeService'
 import { goalService } from './GoalService'
 import { profileService } from './ProfileService'
 
@@ -24,5 +25,6 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   await profileService.getProfile()
   AppState.user = AuthService.user
   await goalService.getGoals()
+  await challengeService.getChallenges()
   // NOTE if there is something you want to do once the user is authenticated, place that here
 })
