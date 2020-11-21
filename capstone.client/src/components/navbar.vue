@@ -26,6 +26,11 @@
             About
           </router-link>
         </li>
+        <li class="nav-item">
+          <router-link :to="{ name: 'Create' }" class="nav-link">
+            Create
+          </router-link>
+        </li>
       </ul>
       <span class="navbar-text">
         <button
