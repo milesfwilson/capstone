@@ -3,7 +3,7 @@
     <div class="col-12">
       <div class="row my-2">
         <div class="col-10 d-flex">
-          <div v-if="goalProps.counter" class="bg-light rounded mr-2 move-left align-self-end" :style="'width: 3px; height:'+goalProps.progress/goalProps.counter*100+'%'">
+          <div v-if="goalProps.counter" class="bg-light rounded mr-2 move-left align-self-center" :style="'width: 3px; height:'+goalProps.progress/goalProps.counter*100+'%'">
           </div>
 
           <div v-else class=" mr-2 " style="width: 3px">

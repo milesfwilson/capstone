@@ -1,11 +1,17 @@
 <template>
   <div class="newChallengeComponent">
     <form @submit.prevent="createChallenge">
-      <input type="text" class="form-control" placeholder="Challenge Title" v-model="state.newChallenge.title">
-      <input type="text" class="form-control" placeholder="Participant ID" v-model="state.newChallenge.participantId">
-      <button type="submit">
-        Create
-      </button>
+      <input type="text" class="form-control my-2" placeholder="Challenge Title" v-model="state.newChallenge.title">
+      <input type="text" class="form-control my-2" placeholder="Participant ID" v-model="state.newChallenge.participantId">
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <button type="submit" class="btn text-light">
+            <h4>
+              Send Request
+            </h4>
+          </button>
+        </div>
+      </div>
     </form>
   </div>
 </template>
@@ -33,5 +39,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+button {
+  width: 50%;
+  height: 50px;
+}
 
+label {
+  width: 20%;
+  border-radius: 25px;
+
+}
 </style>
