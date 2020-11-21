@@ -3,35 +3,41 @@
     <div class="col-12">
       <div class="row my-2">
         <div class="col-10 d-flex">
-          <h4 :class="{'completed':goalProps.completed}" class="my-auto" @click="crossOffGoal(goalProps.id, goalProps)">
+          <div v-if="goalProps.counter" class="bg-light rounded mr-2 move-left align-self-end" :style="'width: 3px; height:'+goalProps.progress/goalProps.counter*100+'%'">
+          </div>
+
+          <div v-else class=" mr-2 " style="width: 3px">
+          </div>
+          <h4 :class="{'completed':goalProps.completed}" class="my-auto grow" @click="crossOffGoal(goalProps.id, goalProps)">
             {{ goalProps.title }}
           </h4>
         </div>
         <div class="col-2 d-flex justify-content-end">
-          <button class="btn" data-toggle="collapse" :data-target="'#collapse' + goalProps.id">
-            <i class="fa fa-expand text-light" aria-hidden="true"></i>
+          <button class="btn grow" data-toggle="collapse" :data-target="'#collapse' + goalProps.id">
+            <i class="fas fa-ellipsis-v text-light"></i>
           </button>
         </div>
       </div>
       <div class="row collapse" :id="'collapse' + goalProps.id">
         <div class="col-12 d-flex justify-content-between">
+          <editGoalComponent :editgoal-props="goalProps" />
           <div class="d-flex">
-            <editGoalComponent :editgoal-props="goalProps" />
             <div class="d-flex" v-if="goalProps.counter">
-              <button class="btn" @click="decrement(goalProps.id, goalProps)">
+              <button class="btn grow" @click="decrement(goalProps.id, goalProps)">
                 <i class="fa fa-minus-circle text-light" aria-hidden="true"></i>
               </button>
 
               <h6 class="my-auto px-2">
                 {{ goalProps.progress }} / {{ goalProps.counter }}
               </h6>
-              <button class="btn" @click="increment(goalProps.id, goalProps)">
+
+              <button class="btn grow" @click="increment(goalProps.id, goalProps)">
                 <i class="fa fa-plus-circle text-light" aria-hidden="true"></i>
               </button>
             </div>
           </div>
-          <button class="btn" @click="deleteGoal(goalProps.id)">
-            <i class="far fa-trash-alt text-danger"></i>
+          <button class="btn grow" @click="deleteGoal(goalProps.id)">
+            <i class="far fa-trash-alt text-light"></i>
           </button>
         </div>
       </div>
@@ -72,5 +78,16 @@ export default {
 .completed {
   text-decoration: line-through;
 }
+
+.move-left {
+  position: relative;
+  left: -10px;
+}
+
+.grow:hover {
+  transform: scale(1.025);
+  transition: all .20s ease-in-out;
+  opacity: .75;
+  }
 
 </style>

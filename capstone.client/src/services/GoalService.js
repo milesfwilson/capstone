@@ -43,6 +43,13 @@ class GoalService {
   async crossOffGoal(id, editedGoal) {
     try {
       editedGoal.completed = !editedGoal.completed
+
+      if (editedGoal.completed && editedGoal.counter) {
+        editedGoal.progress = editedGoal.counter
+      } else if (!editedGoal.completed && editedGoal.counter) {
+        editedGoal.progress = 0
+      }
+
       await api.put('/api/goals/' + id, editedGoal)
     } catch (error) {
       logger.error(error)
