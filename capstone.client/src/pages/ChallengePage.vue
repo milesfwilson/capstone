@@ -3,22 +3,34 @@
     <div class="row">
       <div class="col-12">
         <h3 class="text-center">
-          Challenges
+          Pending Challenges
         </h3>
+        <pendingChallengeComponent v-for="challenge in challenges" :key="challenge.id" :challenge-props="challenge" />
       </div>
     </div>
     <div class="row">
       <div class="col-8 offset-2">
-        <challenegeComponent v-for="challenge in challenges" :key="challenge.id" :challenge-props="challenge" />
+        <div class="row">
+          <div class="col-12 text-center">
+            <h3>Challenges</h3>
+          </div>
+        </div>
+        <challengeComponent v-for="challenge in challenges" :key="challenge.id" :challenge-props="challenge" />
       </div>
     </div>
+    <h3 class="text-center">
+      Rejected Challenges
+    </h3>
+    <rejectedComponent v-for="challenge in challenges" :key="challenge.id" :challenge-props="challenge" />
   </div>
 </template>
 
 <script>
 import { AppState } from '../AppState'
 import { computed } from 'vue'
-import challenegeComponent from '../components/ChallengeComponent'
+import challengeComponent from '../components/ChallengeComponent'
+import pendingChallengeComponent from '../components/PendingChallengeComponent'
+
 export default {
   name: 'ChallengePage',
   setup() {
@@ -26,7 +38,7 @@ export default {
       challenges: computed(() => AppState.challenges)
     }
   },
-  components: { challenegeComponent }
+  components: { challengeComponent, pendingChallengeComponent }
 }
 </script>
 

@@ -3,7 +3,7 @@ import { BadRequest } from '../utils/Errors'
 
 class GoalService {
   async getGoalsByChallengeId(id) {
-    return await dbContext.Goals.find(id)
+    return await dbContext.Goals.findById(id)
   }
 
   async getAll(query = {}) {

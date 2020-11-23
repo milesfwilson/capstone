@@ -23,6 +23,14 @@
         What is your goal?
       </h4>
       <input type="text" id="goalTitle" class="form-control my-2 bg-transparent border border-0 text-light" placeholder="Enter goal" v-model="state.newGoal.title">
+      <h4 class="my-2">
+        What is your start date?
+      </h4>
+      <input type="date" id="endDate" class="form-control my-2 bg-transparent border border-0 text-light" placeholder="End Date" v-model="state.newGoal.startDate">
+      <h4 class="my-2">
+        What is your end date?
+      </h4>
+      <input type="date" id="endDate" class="form-control my-2 bg-transparent border border-0 text-light" placeholder="End Date" v-model="state.newGoal.endDate">
       <h4>Select Category</h4>
       <div class="row">
         <div class="col-10 offset-1 d-flex justify-content-around flex-wrap">
