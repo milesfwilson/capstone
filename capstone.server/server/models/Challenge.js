@@ -6,7 +6,11 @@ const Challenge = new Schema(
   {
     title: { type: String, required: true },
     creatorId: { type: String, required: true },
-    participantId: { type: String, required: false }
+    creatorImg: { type: String, required: false },
+    creatorName: { type: String, required: false },
+    participantId: { type: String, required: false },
+    participantImg: { type: String, required: false },
+    participantName: { type: String, required: false }
     // wager: { type: String, required: true },
 
   },

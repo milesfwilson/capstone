@@ -2,7 +2,9 @@
   <div class="newChallengeComponent">
     <form @submit.prevent="createChallenge">
       <input type="text" class="form-control my-2" placeholder="Challenge Title" v-model="state.newChallenge.title">
-      <input type="text" class="form-control my-2" placeholder="Participant ID" v-model="state.newChallenge.participantId">
+      <!-- <input type="text" class="form-control my-2" placeholder="Participant ID" v-model="state.newChallenge.participantId"> -->
+      <h4>Select who you would like to challenge</h4>
+      <profileListComponent />
       <div class="row">
         <div class="col d-flex justify-content-center">
           <button type="submit" class="btn text-light">
@@ -19,6 +21,7 @@
 <script>
 import { reactive } from 'vue'
 import { challengeService } from '../services/ChallengeService'
+
 export default {
   name: 'NewChallengeComponent',
   setup() {
@@ -34,7 +37,7 @@ export default {
       }
     }
   },
-  components: {}
+  components: { }
 }
 </script>
 

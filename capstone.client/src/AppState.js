@@ -4,6 +4,7 @@ import { reactive } from 'vue'
 export const AppState = reactive({
   user: {},
   profile: {},
+  profiles: [],
   goals: [],
   newGoal: {
     recurring: false,
@@ -11,5 +12,6 @@ export const AppState = reactive({
     challenge: false
   },
   challenges: [],
-  activeChallenge: {}
+  activeChallenge: {},
+  activeChallenger: {}
 })
