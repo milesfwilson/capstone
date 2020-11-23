@@ -14,8 +14,18 @@ class ChallengeService {
 
   async createChallenge(newChallenge) {
     try {
+      // @ts-ignore
+      newChallenge.participantId = AppState.activeChallenger.id
+
+      newChallenge.participantImg = AppState.activeChallenger.picture
+      newChallenge.participantName = AppState.activeChallenger.name
+
+      newChallenge.creatorImg = AppState.profile.picture
+      newChallenge.creatorName = AppState.profile.name
       const res = await api.post('/api/challenges', newChallenge)
       AppState.activeChallenge = res.data
+      AppState.activeChallenger = {}
+
       this.getChallenges()
     } catch (error) {
       logger.error(error)
