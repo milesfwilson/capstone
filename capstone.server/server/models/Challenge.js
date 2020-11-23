@@ -10,7 +10,9 @@ const Challenge = new Schema(
     creatorName: { type: String, required: false },
     participantId: { type: String, required: false },
     participantImg: { type: String, required: false },
-    participantName: { type: String, required: false }
+    participantName: { type: String, required: false },
+    accepted: { type: Boolean, default: false },
+    rejected: { type: Boolean, default: false }
     // wager: { type: String, required: true },
 
   },

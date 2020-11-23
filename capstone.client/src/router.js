@@ -22,6 +22,11 @@ const routes = [
     component: loadPage('ChallengePage')
   },
   {
+    path: '/:challengeId/goals',
+    name: 'GoalChallenge',
+    component: loadPage('GoalChallengePage')
+  },
+  {
     path: '/create',
     name: 'Create',
     component: loadPage('CreateGoalPage')

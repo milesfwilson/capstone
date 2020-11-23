@@ -1,5 +1,5 @@
 <template>
-  <div class="challengeComponent row" v-if="(challengeProps.accepted == true) && (challengeProps.participantId == profile.id || challengeProps.creatorId == profile.id)">
+  <div class="rejectedComponent row" v-if="(challengeProps.rejected == true) && (challengeProps.creatorId == profile.id)">
     <div class="col-12">
       <div class="d-flex radius-25 bg-light text-dark p-2 my-2">
         <img :src="challengeProps.participantImg" height="50" class="rounded-circle mr-auto" alt="">
@@ -12,6 +12,9 @@
         <div class="col-12 d-flex">
           <button class="btn btn-outline-light float-right" data-toggle="collapse" :data-target="'#collapse' + challengeProps.id">
             View Goals
+          </button>
+          <button class="btn btn-outline-light float-right" @click.prevent="deleteChallenge(challengeProps.id)">
+            Delete Challenge
           </button>
         </div>
       </div>
@@ -29,17 +32,21 @@
 </template>
 
 <script>
-import { AppState } from '../AppState'
 import { computed } from 'vue'
+import { AppState } from '../AppState'
 import goalChallengeComponent from '../components/GoalChallengeComponent'
+import { challengeService } from '../services/ChallengeService'
 export default {
-  name: 'ChallengeComponent',
+  name: 'RejectedComponent',
   props: ['challengeProps'],
   setup() {
     return {
       profiles: computed(() => AppState.profiles),
       profile: computed(() => AppState.profile),
-      goals: computed(() => AppState.goals)
+      goals: computed(() => AppState.goals),
+      deleteChallenge(id) {
+        challengeService.deleteChallenge(id)
+      }
     }
   },
   components: { goalChallengeComponent }
@@ -47,7 +54,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.radius-25 {
-border-radius: 30px;
-}
+
 </style>

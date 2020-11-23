@@ -13,5 +13,6 @@ export const AppState = reactive({
   },
   challenges: [],
   activeChallenge: {},
-  activeChallenger: {}
+  activeChallenger: {},
+  challengeGoal: []
 })
