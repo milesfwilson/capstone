@@ -14,6 +14,7 @@ const Goal = new Schema(
     participantId: { type: String, required: false },
     startDate: { type: Date, required: false },
     endDate: { type: Date, required: false }
+    // currentDate: { type: Date, required: true }
     // timeFrame: { type: Number, required: false },
 
   },

@@ -66,6 +66,7 @@ class ChallengeService {
     try {
       body.accepted = true
       body.rejected = false
+      body.participantId = AppState.profile.id
       await api.put('/api/challenges/' + challengeId, body)
     } catch (error) {
       logger.error(error)

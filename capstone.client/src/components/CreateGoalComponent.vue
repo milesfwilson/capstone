@@ -211,7 +211,7 @@ export default {
       goal: computed(() => AppState.newGoal),
       createGoal(newGoal) {
         goalService.createGoal(state.newGoal)
-        // state.newGoal.title = ''
+        state.newGoal.title = ''
         // state.newGoal.category = ''
       },
       recurring(value) {
