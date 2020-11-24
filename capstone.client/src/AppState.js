@@ -14,5 +14,7 @@ export const AppState = reactive({
   challenges: [],
   activeChallenge: {},
   activeChallenger: {},
-  challengeGoal: []
+  challengeGoal: [],
+  sort: {},
+  sortByStatus: false
 })
