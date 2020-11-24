@@ -1,12 +1,15 @@
 <template>
   <div class="home container-fluid bg-dark text-light">
     <div class="row">
-      <div class="col-12 d-flex justify-content-center">
-        <button class="mt-3 btn text-light" data-toggle="collapse" data-target="#contentId">
+      <div class="col-3"></div>
+      <div class="col-6 d-flex justify-content-center">
+        <router-link :to="{ name: 'Create' }" class="mt-3 btn text-light">
           <h3>
-            Create
+            Create Goal
           </h3>
-        </button>
+        </router-link>
+      </div>
+      <div class="col-3 d-flex justify-content-end">
         <div class="dropdown">
           <button class="btn btn-outline-light dropdown-toggle"
                   type="button"
@@ -15,7 +18,7 @@
                   aria-haspopup="true"
                   aria-expanded="false"
           >
-            Filter by Category
+            Sort
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="#" @click.prevent="sort('finance')">Finance</a>
