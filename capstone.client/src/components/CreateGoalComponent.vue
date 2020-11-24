@@ -196,6 +196,7 @@ import NewChallengeComponent from '../components/NewChallengeComponent'
 import { reactive, computed } from 'vue'
 import { goalService } from '../services/GoalService'
 import { AppState } from '../AppState'
+import { DateTime } from 'luxon'
 
 export default {
   name: 'CreateGoalComponent',
@@ -203,6 +204,8 @@ export default {
   setup() {
     const state = reactive({
       newGoal: {
+        lastDate: DateTime.local().plus({ month: 1 }).toISOWeekDate()
+
       }
     })
     return {

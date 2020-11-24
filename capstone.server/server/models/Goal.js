@@ -13,7 +13,8 @@ const Goal = new Schema(
     completed: { type: Boolean, default: false },
     participantId: { type: String, required: false },
     startDate: { type: Date, required: false },
-    endDate: { type: Date, required: false }
+    endDate: { type: Date, required: false },
+    lastDate: {}
     // timeFrame: { type: Number, required: false },
 
   },

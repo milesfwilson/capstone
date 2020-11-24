@@ -5,5 +5,9 @@
     "setup": "npm run setup:client && npm run setup:server",
     "setup:client": "cd capstone.client && npm i",
     "setup:server": "cd capstone.server && npm i"
+  },
+  "dependencies": {
+    "full-icu": "^1.3.1",
+    "luxon": "^1.25.0"
   }
 }
