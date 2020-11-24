@@ -30,7 +30,7 @@ class ChallengeService {
     if (!exists) {
       throw new BadRequest('This challenge does not exist')
     // @ts-ignore
-    } else if (exists._doc.creatorId === userId) {
+    } else if (exists._doc.creatorId === userId || exists._doc.participantId === userId) {
       await dbContext.Challenges.findByIdAndUpdate(challengeId, newChallenge)
       return 'YOUR BOARD HAS BEEN EDITED!'
     }

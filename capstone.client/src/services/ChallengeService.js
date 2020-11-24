@@ -22,21 +22,42 @@ class ChallengeService {
     }
   }
 
+  async reveal(value) {
+    try {
+      AppState.reveal = value
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+
+  async challenge(value) {
+    try {
+      AppState.newGoal.challenge = value
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+
   async createChallenge(newChallenge) {
     try {
       // @ts-ignore
       newChallenge.participantId = AppState.activeChallenger.id
 
+      // @ts-ignore
       newChallenge.participantImg = AppState.activeChallenger.picture
+      // @ts-ignore
       newChallenge.participantName = AppState.activeChallenger.name
 
+      // @ts-ignore
       newChallenge.creatorImg = AppState.profile.picture
+      // @ts-ignore
       newChallenge.creatorName = AppState.profile.name
       const res = await api.post('/api/challenges', newChallenge)
       logger.log(res.data)
       AppState.activeChallenge = res.data
       AppState.activeChallenger = {}
-
+      this.reveal(true)
+      this.challenge(false)
       this.getChallenges()
     } catch (error) {
       logger.error(error)
@@ -62,11 +83,32 @@ class ChallengeService {
     }
   }
 
-  async acceptChallenge(challengeId, body) {
+  // async acceptChallenge(challengeId, body) {
+  //   try {
+  //     body.accepted = true
+  //     body.rejected = false
+  //     body.participantId = AppState.profile.id
+  //     await api.put('/api/challenges/' + challengeId, body)
+  //   } catch (error) {
+  //     logger.error(error)
+  //   }
+  // }
+
+  async acceptChallenge(goal, challenge) {
     try {
-      body.accepted = true
-      body.rejected = false
-      await api.put('/api/challenges/' + challengeId, body)
+      const newGoal = {}
+      // @ts-ignore
+      newGoal.creatorId = AppState.profile.id
+      newGoal.title = goal.title
+      newGoal.category = goal.category
+      newGoal.challengeId = goal.challengeId
+
+      challenge.accepted = true
+      challenge.rejected = false
+      await api.put('/api/challenges/' + challenge.id, challenge)
+      logger.log(AppState.challenges)
+      await api.post('/api/goals/', newGoal)
+      logger.log(AppState.goals)
     } catch (error) {
       logger.error(error)
     }
