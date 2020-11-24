@@ -1,14 +1,16 @@
 <template>
   <div class="createGoalComponent">
-    <h4>Would you like to challenge somebody?</h4>
+    <h4 v-if="!reveal">
+      Would you like to challenge somebody?
+    </h4>
 
-    <div class="d-flex justify-content-around">
+    <div class="d-flex justify-content-around" v-if="!reveal">
       <button class="btn btn-outline-light" @click.prevent="challenge(true)">
         <h4>
           Yes
         </h4>
       </button>
-      <button class="btn btn-outline-light" @click.prevent="challenge(false)">
+      <button class="btn btn-outline-light" @click.prevent="challenge(false), revealForm(true)">
         <h4>
           No
         </h4>
@@ -18,7 +20,7 @@
     <transition-group name="fade">
       <newChallengeComponent v-if="goal.challenge" />
     </transition-group>
-    <form class="form-group hideMe" @submit.prevent="createGoal">
+    <form class="form-group hideMe" @submit.prevent="createGoal" v-if="reveal">
       <h4 class="my-2">
         What is your goal?
       </h4>
@@ -173,12 +175,12 @@
         </button>
       </div>
       <transition name="fade">
-        <input type="number" class="form-control my-2" placeholder="How many would you like to complete?" v-model="state.newGoal.counter" v-if="goal.counter">
+        <input type="number" class="form-control my-2 bg-dark text-light border-0" placeholder="How many would you like to complete?" v-model="state.newGoal.counter" v-if="goal.counter">
       </transition>
 
       <div class="row mt-3">
         <div class="col-12 d-flex justify-content-center">
-          <button type="submit" class="btn text-light">
+          <button type="submit" class="btn btn-outline-light">
             <h3>
               Submit
             </h3>
@@ -209,6 +211,7 @@ export default {
       state,
       profile: computed(() => AppState.profile),
       goal: computed(() => AppState.newGoal),
+      reveal: computed(() => AppState.reveal),
       createGoal(newGoal) {
         goalService.createGoal(state.newGoal)
         state.newGoal.title = ''
@@ -222,6 +225,9 @@ export default {
       },
       challenge(value) {
         AppState.newGoal.challenge = value
+      },
+      revealForm(value) {
+        AppState.reveal = value
       }
     }
   }

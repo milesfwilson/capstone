@@ -1,3 +1,4 @@
+import router from '../router'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
@@ -26,6 +27,7 @@ class GoalService {
       AppState.goals = res.data
       this.getGoals()
       AppState.activeChallenge = {}
+      router.push({ name: 'Home' })
     } catch (error) {
       logger.error(error)
     }
