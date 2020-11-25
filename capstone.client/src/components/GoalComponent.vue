@@ -1,5 +1,5 @@
 <template>
-  <div class="goalComponent" v-if="(goalProps.creatorId == profile.id || goalProps.participantId == profile.id) && ((goalProps.category == sort || (goalProps.category== {} || sortByStatus == 'all')) || (goalProps.completed == sortByStatus || (goalProps.completed == {} || sortByStatus == 'all')))">
+  <div class="goalComponent" v-if="(goalProps.creatorId == profile.id) && ((goalProps.category == sort || (goalProps.category== {} || sortByStatus == 'all')) || (goalProps.completed == sortByStatus || (goalProps.completed == {} || sortByStatus == 'all')))">
     <div class="col-12">
       <div class="row my-2">
         <div class="col-10 d-flex">
