@@ -103,6 +103,22 @@ class ChallengeService {
       newGoal.category = goal.category
       newGoal.challengeId = goal.challengeId
 
+      if (goal.counter) {
+        newGoal.counter = goal.counter
+      }
+
+      if (goal.endDate) {
+        newGoal.endDate = goal.endDate
+      }
+
+      if (goal.lastDate) {
+        newGoal.lastDate = goal.lastDate
+      }
+
+      if (goal.startDate) {
+        newGoal.startDate = goal.startDate
+      }
+
       challenge.accepted = true
       challenge.rejected = false
       await api.put('/api/challenges/' + challenge.id, challenge)
