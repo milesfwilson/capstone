@@ -140,6 +140,17 @@ class ChallengeService {
       logger.error(error)
     }
   }
+
+  async leaveChallenge(challengeId, body) {
+    try {
+      body.rejected = true
+      body.accepted = false
+      await api.put('/api/challenges/' + challengeId, body)
+      logger.log(AppState.challenges)
+    } catch (error) {
+      logger.error(error)
+    }
+  }
 }
 
 export const challengeService = new ChallengeService()

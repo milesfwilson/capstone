@@ -1,17 +1,11 @@
 <template>
-  <div class="challengeComponent row" v-if="(challengeProps.accepted == false) && (challengeProps.participantId == profile.id || challengeProps.creatorId == profile.id) && (challengeProps.rejected == false)">
+  <div class="challengeComponent row mb-3" v-if="(challengeProps.accepted == false) && (challengeProps.participantId == profile.id || challengeProps.creatorId == profile.id) && (challengeProps.rejected == false)">
     <div class="col-12">
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-12 d-flex">
-          <button class="btn btn-outline-light radius-25" v-if="challengeProps.participantId == profile.id" @click.prevent="acceptChallenge(challengeProps.id, challengeProps)">
-            Accept Challenge
-          </button>
-          <button class="btn btn-outline-light radius-25" v-if="challengeProps.participantId == profile.id" @click.prevent="rejectChallenge(challengeProps.id, challengeProps)">
-            Reject Challenge
-          </button>
           <label for="waitingFor" class="ml-auto" v-if="challengeProps.rejected==false && challengeProps.accepted==false && challengeProps.creatorId == profile.id">Waiting for:</label>
         </div>
-      </div>
+      </div> -->
       <div class="d-flex radius-25 bg-light text-dark p-2 my-1">
         <img :src="challengeProps.creatorImg" height="50" class="mr-auto rounded-circle" id="waitingFor" alt="">
         <h4 class="my-auto">
@@ -20,13 +14,18 @@
         <img :src="challengeProps.participantImg" height="50" class="rounded-circle ml-auto" alt="">
       </div>
       <div class="row">
-        <div class="col-12 d-flex">
-          <button class="btn btn-outline-light float-right mb-2" data-toggle="collapse" :data-target="'#collapse' + challengeProps.id">
-            View Goals
-          </button>
+        <div class="col-12">
+          <div class="row">
+            <div class="col-6">
+              <button v-if="profile.id == challengeProps.creatorId" class="radius-25 btn-outline-light btn ml-3" @click="cancelChallenge(challengeProps.id)">
+                Cancel
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row collapse" :id="'collapse' + challengeProps.id">
+
+      <div class="row">
         <div class="col-12">
           <goalChallengeComponent v-for="goal in goals"
                                   :key="goal.id"
@@ -52,11 +51,8 @@ export default {
       profiles: computed(() => AppState.profiles),
       profile: computed(() => AppState.profile),
       goals: computed(() => AppState.goals),
-      acceptChallenge(id, challenge) {
-        challengeService.acceptChallenge(id, challenge)
-      },
-      rejectChallenge(id, challenge) {
-        challengeService.rejectChallenge(id, challenge)
+      cancelChallenge(id) {
+        challengeService.deleteChallenge(id)
       }
     }
   },
@@ -66,6 +62,6 @@ export default {
 
 <style lang="scss" scoped>
 .radius-25 {
-  border-radius: 30px;
+  border-radius: 35px;
 }
 </style>

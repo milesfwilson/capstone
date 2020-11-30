@@ -1,27 +1,31 @@
 <template>
   <div class="challengePage container-fluid bg-dark text-light">
     <div class="row">
-      <div class="col-12">
+      <div class="col-10 offset-1">
         <h3 class="text-center">
           Pending Challenges
         </h3>
         <pendingChallengeComponent v-for="challenge in challenges" :key="challenge.id" :challenge-props="challenge" />
       </div>
     </div>
+
     <div class="row">
-      <div class="col-8 offset-2">
-        <div class="row">
-          <div class="col-12 text-center">
-            <h3>Challenges</h3>
-          </div>
-        </div>
+      <div class="col-10 offset-1">
+        <h3 class="text-center">
+          Challenges
+        </h3>
+
         <challengeComponent v-for="challenge in challenges" :key="challenge.id" :challenge-props="challenge" />
       </div>
     </div>
-    <h3 class="text-center">
-      Rejected Challenges
-    </h3>
-    <rejectedComponent v-for="challenge in challenges" :key="challenge.id" :challenge-props="challenge" />
+    <div class="row">
+      <div class="col-10 offset-1">
+        <h3 class="text-center">
+          Rejected Challenges
+        </h3>
+        <rejectedComponent v-for="challenge in challenges" :key="challenge.id" :challenge-props="challenge" />
+      </div>
+    </div>
   </div>
 </template>
 
