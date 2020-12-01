@@ -42,18 +42,20 @@
 <script>
 import GoalsComponent from '../components/GoalsComponent'
 
-import { reactive, computed } from 'vue'
+import { reactive, computed, onMounted } from 'vue'
 import { goalService } from '../services/GoalService'
 import { AppState } from '../AppState'
 
 export default {
   name: 'Home',
   components: { GoalsComponent },
-  setup() {
+
+  setup(props) {
     const state = reactive({
       newGoal: {
       }
     })
+    onMounted(() => goalService.updateGoal())
     return {
       state,
       profile: computed(() => AppState.profile),
