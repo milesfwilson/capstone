@@ -1,7 +1,7 @@
 <template>
   <div class="about container-fluid text-light">
-    <div class="row bg-about">
-      <div class="col-12">
+    <div class="row bg-about p-5">
+      <div class="col-12 my-auto">
         <h1 class="text-center">
           - Our Mission -
         </h1>
@@ -67,6 +67,11 @@ export default {
 
 <style>
 .bg-about{
-  background: url(https://media.istockphoto.com/photos/silhouettes-of-happy-businessperson-success-of-business-concept-picture-id1166516811?k=6&m=1166516811&s=612x612&w=0&h=u7Mfamw_PGOeDybW3vhgKZ0wA6wU9Sx6RGwSN6IjsKA=);
+  background-image: url(https://images.unsplash.com/photo-1487266659293-c4762f375955?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position:center;
+  height: 25vh;
+
 }
 </style>
