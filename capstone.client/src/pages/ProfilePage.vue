@@ -5,7 +5,7 @@
         <img class="rounded-circle img-fluid" :src="profile.picture" alt="" />
       </div>
       <div class="col-8 d-flex">
-        <h3 class="my-auto">
+        <h3 class="my-auto text-light">
           {{ profile.name }}
         </h3>
       </div>
@@ -13,12 +13,12 @@
     <div class="row mt-3 bg-dark">
       <div class="col-6 d-flex">
         <h5 class="text-success my-auto py-2">
-          Wins:
+          Goals Completed: {{ profile.completed }}
         </h5>
       </div>
       <div class="col-6 d-flex">
         <h5 class="text-danger my-auto py-2">
-          Losses:
+          Goals in Progress:
         </h5>
       </div>
     </div>
@@ -27,7 +27,7 @@
     </div>
     <div class="row mt-3">
       <div class="col-12">
-        <h2 class="text-center">
+        <h2 class="text-center text-light">
           See Goals
         </h2>
       </div>

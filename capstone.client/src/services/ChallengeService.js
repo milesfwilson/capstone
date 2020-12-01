@@ -89,9 +89,17 @@ class ChallengeService {
 
   async pendingChallenge() {
     try {
-      AppState.pending = AppState.challenges.filter(challenge =>
-        ((challenge.accepted === false) && (challenge.participantId === AppState.profile.id) && (challenge.rejected === false))
-      )
+      let filteredArray = []
+      AppState.pending = []
+      filteredArray = AppState.challenges.filter(challenge => ((challenge.accepted === false) && (challenge.participantId === AppState.profile.id) && (challenge.rejected === false)))
+      filteredArray.forEach(challenge => {
+        AppState.goals.forEach(goal => {
+          if (goal.challengeId === challenge.id) {
+            AppState.pending.push(challenge)
+          }
+        })
+      })
+      logger.log('Checked challenges', AppState.checkedChallenges)
     } catch (error) {
       logger.error(error)
     }
@@ -99,9 +107,17 @@ class ChallengeService {
 
   async challengeCheck() {
     try {
-      AppState.checkedChallenges = AppState.challenges.filter(challenge => ((challenge.accepted === false) && (challenge.participantId === AppState.profile.id || challenge.creatorId === AppState.profile.id) && (challenge.rejected === false)))
-      AppState.checkedChallenges = AppState.checkedChallenges.filter(challenge => (AppState.goals.filter(goal => (goal.challengeId === challenge.id))))
-      logger.log(AppState.checkedChallenges)
+      let filteredArray = []
+      AppState.checkedChallenges = []
+      filteredArray = AppState.challenges.filter(challenge => ((challenge.accepted === false) && (challenge.participantId === AppState.profile.id || challenge.creatorId === AppState.profile.id) && (challenge.rejected === false)))
+      filteredArray.forEach(challenge => {
+        AppState.goals.forEach(goal => {
+          if (goal.challengeId === challenge.id) {
+            AppState.checkedChallenges.push(challenge)
+          }
+        })
+      })
+      logger.log('Checked challenges', AppState.checkedChallenges)
     } catch (error) {
       logger.error(error)
     }
