@@ -1,7 +1,7 @@
 <template>
-  <div class="rejectedComponent row" v-if="(challengeProps.rejected == true) && (challengeProps.creatorId == profile.id)">
+  <div class="rejectedComponent row mb-3" v-if="(challengeProps.rejected == true) && (challengeProps.creatorId == profile.id)">
     <div class="col-12">
-      <div class="d-flex radius-25 bg-light text-dark p-2 my-2">
+      <div class="d-flex radius-25 bg-light text-dark p-2 my-1">
         <img :src="challengeProps.participantImg" height="50" class="rounded-circle mr-auto" alt="">
         <h4 class="my-auto">
           {{ challengeProps.title }}
@@ -10,15 +10,15 @@
       </div>
       <div class="row">
         <div class="col-12 d-flex">
-          <button class="btn btn-outline-light float-right" data-toggle="collapse" :data-target="'#collapse' + challengeProps.id">
+          <!-- <button class="btn btn-outline-light float-right" data-toggle="collapse" :data-target="'#collapse' + challengeProps.id">
             View Goals
-          </button>
-          <button class="btn btn-outline-light float-right" @click.prevent="deleteChallenge(challengeProps.id)">
-            Delete Challenge
+          </button> -->
+          <button class="btn btn-outline-light ml-3 radius-25" @click.prevent="deleteChallenge(challengeProps.id)">
+            Delete
           </button>
         </div>
       </div>
-      <div class="row collapse" :id="'collapse' + challengeProps.id">
+      <!-- <div class="row collapse" :id="'collapse' + challengeProps.id">
         <div class="col-12">
           <goalChallengeComponent v-for="goal in goals"
                                   :key="goal.id"
@@ -26,7 +26,7 @@
                                   :challenge-props="challengeProps"
           />
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -34,7 +34,7 @@
 <script>
 import { computed } from 'vue'
 import { AppState } from '../AppState'
-import goalChallengeComponent from '../components/GoalChallengeComponent'
+// import goalChallengeComponent from '../components/GoalChallengeComponent'
 import { challengeService } from '../services/ChallengeService'
 export default {
   name: 'RejectedComponent',
@@ -49,10 +49,12 @@ export default {
       }
     }
   },
-  components: { goalChallengeComponent }
+  components: { }
 }
 </script>
 
 <style lang="scss" scoped>
-
+.radius-25 {
+  border-radius: 35px;
+}
 </style>

@@ -1,7 +1,13 @@
 <template>
+  <!-- <div v-for="challenge in challenges" :key="challenge.id" :goalProps="goalProps">
+    <div v-if="((challenge.id == goalProps.challengeId) && (challenge.accepted && !challenge.rejected) && (profile.id == goalProps.creatorId)) || ((!goalProps.challengeId) && (profile.id == goalProps.creatorId))">
+      {{ challenge.title }}
+    </div>
+  </div> -->
+
   <div class="goalComponent" v-if="(goalProps.creatorId == profile.id) && ((goalProps.category == sort || (goalProps.category== {} || sortByStatus == 'all')) || (goalProps.completed == sortByStatus || (goalProps.completed == {} || sortByStatus == 'all')))">
     <div class="col-12">
-      <div class="row my-2">
+      <div class="row my-1">
         <div class="col-10 d-flex">
           <div v-if="goalProps.counter" class="bg-light rounded mr-2 move-left align-self-center" :style="'width: 3px; height:'+ goalProps.progress/goalProps.counter*100+'%'">
           </div>
@@ -58,6 +64,7 @@ export default {
       profile: computed(() => AppState.profile),
       sort: computed(() => AppState.sort),
       sortByStatus: computed(() => AppState.sortByStatus),
+      challenges: computed(() => AppState.challenges),
       deleteGoal(id) {
         goalService.deleteGoal(id)
       },
