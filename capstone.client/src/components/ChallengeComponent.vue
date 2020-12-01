@@ -1,5 +1,5 @@
 <template>
-  <div class="challengeComponent row mb-3" v-if="(challengeProps.accepted == true) && (challengeProps.participantId == profile.id || challengeProps.creatorId == profile.id)">
+  <div class="challengeComponent row mb-3" v-if="(challengeProps.accepted == true) && (challengeProps.participantId == profile.id || challengeProps.creatorId == profile.id) ">
     <div class="col-12 ">
       <div class="radius-25 bg-light text-dark p-2 my-1 text-center">
         <!-- <img :src="challengeProps.participantImg" height="50" class="rounded-circle mr-auto" alt=""> -->
