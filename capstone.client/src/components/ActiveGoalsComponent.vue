@@ -2,7 +2,7 @@
   <div class="activeGoalsComponent">
     <div class="col-12">
       <li>
-        <h6>
+        <h6 class="text-light" v-if="profile.id === goalProps.creatorId">
           {{ goalProps.title }}
         </h6>
       </li>
@@ -18,7 +18,8 @@ export default {
   props: ['goalProps'],
   setup() {
     return {
-      activeGoals: computed(() => AppState.goals)
+      activeGoals: computed(() => AppState.goals),
+      profile: computed(() => AppState.profile)
     }
   },
   components: {}

@@ -19,5 +19,6 @@ export const AppState = reactive({
   sortByStatus: false,
   reveal: false,
   pending: [],
-  checkedChallenges: []
+  checkedChallenges: [],
+  myGoals: []
 })

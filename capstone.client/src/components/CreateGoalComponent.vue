@@ -26,6 +26,9 @@
     <transition-group name="fade">
       <newChallengeComponent v-if="goal.challenge" />
     </transition-group>
+    <p v-if="activeChallenge.id" class="text-danger">
+      Challenge will not be sent unless goal is also submitted
+    </p>
     <form class="form-group hideMe" @submit.prevent="createGoal" v-if="reveal">
       <h4 class="my-2">
         What is your goal?
@@ -34,23 +37,29 @@
       <h4 class="my-2">
         What is your start date?
       </h4>
-      <input type="date"
-             id="endDate"
-             class="form-control my-2 bg-transparent border border-0 text-light"
-             placeholder="End Date"
-             v-model="state.newGoal.startDate"
-             required
-      >
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+          <input type="date"
+                 id="endDate"
+                 class="my-2 bg-light border border-0 text-dark radius-25 p-2"
+                 v-model="state.newGoal.startDate"
+                 required
+          >
+        </div>
+      </div>
       <h4 class="my-2">
         What is your end date?
       </h4>
-      <input type="date"
-             id="endDate"
-             class="form-control my-2 bg-transparent border border-0 text-light"
-             placeholder="End Date"
-             v-model="state.newGoal.endDate"
-             required
-      >
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+          <input type="date"
+                 id="endDate"
+                 class="my-2 bg-light border border-0 text-dark radius-25 p-2"
+                 v-model="state.newGoal.endDate"
+                 required
+          >
+        </div>
+      </div>
       <h4>Select Category</h4>
       <div class="row">
         <div class="col-10 offset-1 d-flex justify-content-around flex-wrap">
@@ -267,6 +276,7 @@ export default {
       profile: computed(() => AppState.profile),
       goal: computed(() => AppState.newGoal),
       reveal: computed(() => AppState.reveal),
+      activeChallenge: computed(() => AppState.activeChallenge),
       createGoal(newGoal) {
         goalService.createGoal(state.newGoal)
         state.newGoal.title = ''
@@ -305,6 +315,10 @@ label {
   width: 20%;
   border-radius: 25px;
 
+}
+
+.radius-25{
+border-radius: 35px;
 }
 
 </style>
