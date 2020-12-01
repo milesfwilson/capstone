@@ -1,5 +1,5 @@
 <template>
-  <div class="profileRowComponent row my-2" @click="selectChallenger(profileProps)">
+  <div class="profileRowComponent row my-2" @click="selectChallenger(profileProps)" v-if="profile.id != profileProps.id">
     <div class="col-10 offset-1">
       <div class="grow d-flex radius-25 p-1" :class="{'bg-light text-dark': profileProps.id == activeChallenger.id}">
         <img :src="profileProps.picture" height="60" class="rounded-circle" alt="">
@@ -21,6 +21,7 @@ export default {
   setup() {
     return {
       activeChallenger: computed(() => AppState.activeChallenger),
+      profile: computed(() => AppState.profile),
       selectChallenger(profile) {
         AppState.activeChallenger = profile
       }
@@ -38,6 +39,6 @@ export default {
   }
 
   .radius-25 {
-    border-radius: 25px;
+    border-radius: 35px;
   }
 </style>

@@ -1,12 +1,15 @@
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
+import { goalService } from './GoalService'
 
 class ChallengeService {
   async getChallenges() {
     try {
       const res = await api.get('/api/challenges')
       AppState.challenges = res.data
+      this.pendingChallenge()
+      this.challengeCheck()
     } catch (error) {
       logger.error(error)
     }
@@ -78,6 +81,27 @@ class ChallengeService {
     try {
       const res = await api.put('/api/challenges/' + challengeId, body)
       AppState.challenges = res.data
+      this.getChallenges()
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+
+  async pendingChallenge() {
+    try {
+      AppState.pending = AppState.challenges.filter(challenge =>
+        ((challenge.accepted === false) && (challenge.participantId === AppState.profile.id) && (challenge.rejected === false))
+      )
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+
+  async challengeCheck() {
+    try {
+      AppState.checkedChallenges = AppState.challenges.filter(challenge => ((challenge.accepted === false) && (challenge.participantId === AppState.profile.id || challenge.creatorId === AppState.profile.id) && (challenge.rejected === false)))
+      AppState.checkedChallenges = AppState.checkedChallenges.filter(challenge => (AppState.goals.filter(goal => (goal.challengeId === challenge.id))))
+      logger.log(AppState.checkedChallenges)
     } catch (error) {
       logger.error(error)
     }
@@ -125,6 +149,8 @@ class ChallengeService {
       logger.log(AppState.challenges)
       await api.post('/api/goals/', newGoal)
       logger.log(AppState.goals)
+      this.getChallenges()
+      goalService.getGoals()
     } catch (error) {
       logger.error(error)
     }
@@ -136,6 +162,7 @@ class ChallengeService {
       body.accepted = false
       await api.put('/api/challenges/' + challengeId, body)
       logger.log(AppState.challenges)
+      this.getChallenges()
     } catch (error) {
       logger.error(error)
     }
@@ -147,6 +174,7 @@ class ChallengeService {
       body.accepted = false
       await api.put('/api/challenges/' + challengeId, body)
       logger.log(AppState.challenges)
+      this.getChallenges()
     } catch (error) {
       logger.error(error)
     }
