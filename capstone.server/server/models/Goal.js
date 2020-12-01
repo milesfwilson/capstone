@@ -8,16 +8,16 @@ const Goal = new Schema(
     challengeId: { type: ObjectId, ref: 'Challenge', required: false },
     title: { type: String, required: true },
     category: { type: String, required: true },
-    counter: { type: Number, required: false },
+    counter: { type: Number, default: 1, required: true },
     progress: { type: Number, default: 0, required: true },
     completed: { type: Boolean, default: false },
     participantId: { type: String, required: false },
-    startDate: { type: Date, required: false },
+    startDate: { type: Date, required: true },
 
-    endDate: { type: Date, required: false },
-    lastDate: {}
+    endDate: { type: Date, required: true },
+    lastDate: {},
 
-    // timeFrame: { type: Number, required: false },
+    timeFrame: { type: String, required: false },
 
   },
 

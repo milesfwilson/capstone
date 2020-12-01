@@ -206,7 +206,7 @@ export default {
   setup() {
     const state = reactive({
       newGoal: {
-        lastDate: DateTime.local().plus({ month: 1 }).toISOWeekDate()
+        lastDate: DateTime.local().plus({ minute: 5 })
 
       }
     })

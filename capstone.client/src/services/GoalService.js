@@ -2,6 +2,7 @@ import router from '../router'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
+import { DateTime } from 'luxon'
 
 class GoalService {
   async getGoals() {
@@ -62,6 +63,55 @@ class GoalService {
     try {
       const res = await api.put('/api/goals/' + goalId, body)
       AppState.goals = res.data
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+
+  async updateGoal() {
+    try {
+      AppState.goals.forEach(async g => {
+        const now = DateTime.local()
+        if (g.endDate < now && g.timeFrame === 'daily' && g.lastDate.plus({ day: 1 }) < now) {
+          if (g.progress === g.counter) {
+            // await api.put('/api/profile/' + g.creatorId + '/completed?completed=1')
+            await api.put('/api/goals/' + g.id, { progress: 0, lastDate: g.lastDate.plus({ day: 1 }) })
+          } else {
+            // await api.put('/api/profile/' + g.creatorId + '/failures?failures=1')
+            await api.put('/api/goals/' + g.id, { progress: 0, lastDate: g.lastDate.plus({ day: 1 }) })
+          }
+        } else if (g.endDate < DateTime.local() && g.timeFrame === 'weekly' && g.lastDate.plus({ week: 1 }) < DateTime.local()) {
+          if (g.progress === g.counter) {
+            await api.put('/api/profile/' + g.creatorId + '/completed?completed=1')
+            await api.put('/api/goals/' + g.id, { progress: 0, lastDate: g.lastDate.plus({ week: 1 }) })
+          } else {
+            await api.put('/api/profile/' + g.creatorId + '/failures?failures=1')
+            await api.put('/api/goals/' + g.id, { progress: 0, lastDate: g.lastDate.plus({ week: 1 }) })
+          }
+        } else if (g.endDate < DateTime.local() && g.timeFrame === 'monthly' && g.lastDate.plus({ month: 1 }) < DateTime.local()) {
+          if (g.progress === g.counter) {
+            await api.put('/api/profile/' + g.creatorId + '/completed?completed=1')
+            await api.put('/api/goals/' + g.id, { progress: 0, lastDate: g.lastDate.plus({ month: 1 }) })
+          } else {
+            await api.put('/api/profile/' + g.creatorId + '/failures?failures=1')
+            await api.put('/api/goals/' + g.id, { progress: 0, lastDate: g.lastDate.plus({ month: 1 }) })
+          }
+        } else if (g.endDate < DateTime.local() && g.timeFrame === 'yearly' && g.lastDate.plus({ year: 1 }) < DateTime.local()) {
+          if (g.progress === g.counter) {
+            await api.put('/api/profile/' + g.creatorId + '/completed?completed=1')
+            await api.put('/api/goals/' + g.id, { progress: 0, lastDate: g.lastDate.plus({ year: 1 }) })
+          } else {
+            await api.put('/api/profile/' + g.creatorId + '/failures?failures=1')
+            await api.put('/api/goals/' + g.id, { progress: 0, lastDate: g.lastDate.plus({ year: 1 }) })
+          }
+        }
+        this.getGoals()
+      }
+
+      )
+
+      // const res = await api.put('/api/goals/' + goalId, body)
+      // AppState.goals = res.data
     } catch (error) {
       logger.error(error)
     }
