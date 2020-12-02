@@ -5,12 +5,18 @@
     </h4>
 
     <div class="d-flex justify-content-around" v-if="!reveal">
-      <button class="btn btn-outline-light" @click.prevent="challenge(true)">
+      <button class="btn btn-outline-light"
+              @click.prevent="challenge(true)"
+      >
         <h4>
           Yes
         </h4>
       </button>
-      <button class="btn btn-outline-light" @click.prevent="challenge(false), revealForm(true)">
+      <button class="
+              btn
+              btn-outline-light"
+              @click.prevent="challenge(false), revealForm(true)"
+      >
         <h4>
           No
         </h4>
@@ -20,6 +26,9 @@
     <transition-group name="fade">
       <newChallengeComponent v-if="goal.challenge" />
     </transition-group>
+    <p v-if="activeChallenge.id" class="text-danger">
+      Challenge will not be sent unless goal is also submitted
+    </p>
     <form class="form-group hideMe" @submit.prevent="createGoal" v-if="reveal">
       <h4 class="my-2">
         What is your goal?
@@ -28,15 +37,36 @@
       <h4 class="my-2">
         What is your start date?
       </h4>
-      <input type="date" id="endDate" class="form-control my-2 bg-transparent border border-0 text-light" placeholder="End Date" v-model="state.newGoal.startDate">
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+          <input type="date"
+                 id="endDate"
+                 class="my-2 bg-light border border-0 text-dark radius-25 p-2"
+                 v-model="state.newGoal.startDate"
+                 required
+          >
+        </div>
+      </div>
       <h4 class="my-2">
         What is your end date?
       </h4>
-      <input type="date" id="endDate" class="form-control my-2 bg-transparent border border-0 text-light" placeholder="End Date" v-model="state.newGoal.endDate">
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+          <input type="date"
+                 id="endDate"
+                 class="my-2 bg-light border border-0 text-dark radius-25 p-2"
+                 v-model="state.newGoal.endDate"
+                 required
+          >
+        </div>
+      </div>
       <h4>Select Category</h4>
       <div class="row">
         <div class="col-10 offset-1 d-flex justify-content-around flex-wrap">
-          <label class="btn btn-outline-light m-1">
+          <label class="btn btn-outline-light m-1"
+                 :class="{'bg-light text-dark': state.newGoal.category ==
+                   'mental'}"
+          >
             <input type="radio"
                    value="mental"
                    name="mental"
@@ -45,7 +75,10 @@
                    v-model="state.newGoal.category"
             > Mental
           </label>
-          <label class="btn btn-outline-light m-1">
+          <label class="btn btn-outline-light m-1"
+                 :class="{'bg-light text-dark': state.newGoal.category ==
+                   'finance'}"
+          >
             <input type="radio"
                    value="finance"
                    name="options"
@@ -54,7 +87,10 @@
                    v-model="state.newGoal.category"
             > Finance
           </label>
-          <label class="btn btn-outline-light m-1">
+          <label class="btn btn-outline-light m-1"
+                 :class="{'bg-light text-dark': state.newGoal.category ==
+                   'health'}"
+          >
             <input type="radio"
                    value="health"
                    name="options"
@@ -63,7 +99,10 @@
                    v-model="state.newGoal.category"
             > Health
           </label>
-          <label class="btn btn-outline-light m-1">
+          <label class="btn btn-outline-light m-1"
+                 :class="{'bg-light text-dark': state.newGoal.category ==
+                   'skill'}"
+          >
             <input type="radio"
                    value="skill"
                    name="options"
@@ -72,7 +111,10 @@
                    v-model="state.newGoal.category"
             > Skill
           </label>
-          <label class="btn btn-outline-light m-1">
+          <label class="btn btn-outline-light m-1"
+                 :class="{'bg-light text-dark': state.newGoal.category ==
+                   'project'}"
+          >
             <input type="radio"
                    value="project"
                    name="options"
@@ -81,7 +123,10 @@
                    v-model="state.newGoal.category"
             > Project
           </label>
-          <label class="btn btn-outline-light m-1">
+          <label class="btn btn-outline-light m-1"
+                 :class="{'bg-light text-dark': state.newGoal.category ==
+                   'travel'}"
+          >
             <input type="radio"
                    value="travel"
                    name="options"
@@ -90,7 +135,10 @@
                    v-model="state.newGoal.category"
             > Travel
           </label>
-          <label class="btn btn-outline-light m-1">
+          <label class="btn btn-outline-light m-1"
+                 :class="{'bg-light text-dark': state.newGoal.category ==
+                   'other'}"
+          >
             <input type="radio"
                    value="other"
                    name="other"
@@ -119,7 +167,10 @@
       <transition-group name="fade">
         <span class="row mt-3" v-if="goal.recurring">
           <div class="col-10 offset-1 d-flex justify-content-around hideMe ">
-            <label class="btn btn-outline-light m-1">
+            <label class="btn btn-outline-light m-1"
+                   :class="{'bg-light text-dark': state.newGoal.timeFrame ==
+                     'daily'}"
+            >
               <input type="radio"
                      value="daily"
                      name="daily"
@@ -128,7 +179,10 @@
                      v-model="state.newGoal.timeFrame"
               > Daily
             </label>
-            <label class="btn btn-outline-light m-1">
+            <label class="btn btn-outline-light m-1"
+                   :class="{'bg-light text-dark': state.newGoal.timeFrame ==
+                     'weekly'}"
+            >
               <input type="radio"
                      value="weekly"
                      name="weekly"
@@ -137,7 +191,10 @@
                      v-model="state.newGoal.timeFrame"
               > Weekly
             </label>
-            <label class="btn btn-outline-light m-1">
+            <label class="btn btn-outline-light m-1"
+                   :class="{'bg-light text-dark': state.newGoal.timeFrame ==
+                     'monthly'}"
+            >
               <input type="radio"
                      value="monthly"
                      name="monthly"
@@ -146,7 +203,10 @@
                      v-model="state.newGoal.timeFrame"
               > Monthly
             </label>
-            <label class="btn btn-outline-light m-1">
+            <label class="btn btn-outline-light m-1"
+                   :class="{'bg-light text-dark': state.newGoal.timeFrame ==
+                     'yearly'}"
+            >
               <input type="radio"
                      value="yearly"
                      name="yearly"
@@ -214,10 +274,10 @@ export default {
       profile: computed(() => AppState.profile),
       goal: computed(() => AppState.newGoal),
       reveal: computed(() => AppState.reveal),
+      activeChallenge: computed(() => AppState.activeChallenge),
       createGoal(newGoal) {
         goalService.createGoal(state.newGoal)
         state.newGoal.title = ''
-        // state.newGoal.category = ''
       },
       recurring(value) {
         AppState.newGoal.recurring = value
@@ -253,6 +313,10 @@ label {
   width: 20%;
   border-radius: 25px;
 
+}
+
+.radius-25{
+border-radius: 35px;
 }
 
 </style>

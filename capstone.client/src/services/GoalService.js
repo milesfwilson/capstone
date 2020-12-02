@@ -29,6 +29,7 @@ class GoalService {
       this.getGoals()
       AppState.activeChallenge = {}
       router.push({ name: 'Home' })
+      AppState.reveal = false
     } catch (error) {
       logger.error(error)
     }

@@ -2,6 +2,11 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <h3>Capstone</h3>
+      <div class="d-flex bg-circle ml-2 text-center" v-if="pending.length > 0">
+        <h6 class="text-light m-auto">
+          {{ pending.length }}
+        </h6>
+      </div>
     </router-link>
     <button
       class="navbar-toggler"
@@ -33,7 +38,14 @@
         </li>
         <li class="nav-item">
           <router-link :to="{ name: 'Challenges' }" class="nav-link">
-            Challenges
+            <div class="d-flex">
+              Challenges
+              <div class="d-flex bg-circle ml-2 text-center" v-if="pending.length > 0">
+                <h6 class="text-light m-auto">
+                  {{ pending.length }}
+                </h6>
+              </div>
+            </div>
           </router-link>
         </li>
       </ul>
@@ -94,6 +106,7 @@ export default {
     return {
       state,
       user: computed(() => AppState.user),
+      pending: computed(() => AppState.pending),
       async login() {
         AuthService.loginWithPopup()
       },
@@ -127,4 +140,11 @@ a:hover {
 .nav-item .nav-link.router-link-exact-active{
   color: var(--light);
 }
+
+.bg-circle{
+  background-color: rgb(249, 64, 64);
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  }
 </style>

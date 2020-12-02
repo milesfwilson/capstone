@@ -16,7 +16,9 @@ export default {
   name: 'GoalsComponent',
   setup() {
     return {
-      goals: computed(() => AppState.goals)
+      goals: computed(() => AppState.goals),
+      myGoals: computed(() => AppState.myGoals)
+
     }
   },
   components: { GoalComponent }

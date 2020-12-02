@@ -7,7 +7,7 @@ const Goal = new Schema(
     creatorId: { type: String, required: true },
     challengeId: { type: ObjectId, ref: 'Challenge', required: false },
     title: { type: String, required: true },
-    category: { type: String, required: true },
+    category: { type: String, required: true, default: 'other' },
     counter: { type: Number, default: 1, required: true },
     progress: { type: Number, default: 0, required: true },
     completed: { type: Boolean, default: false },
