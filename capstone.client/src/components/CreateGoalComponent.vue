@@ -235,7 +235,18 @@
         </button>
       </div>
       <transition name="fade">
-        <input type="number" class="form-control my-2 bg-dark text-light border-0" placeholder="How many would you like to complete?" v-model="state.newGoal.counter" v-if="goal.counter">
+        <div class="row">
+          <div class="col-12 d-flex justify-content-center">
+            <input type="number"
+                   class="p-2 radius-25 my-2 bg-light text-dark border-0 w-25 text-center"
+                   placeholder="How many?"
+                   v-model="state.newGoal.counter"
+                   v-if="goal.counter"
+                   min="1"
+                   max="10000"
+            >
+          </div>
+        </div>
       </transition>
 
       <div class="row mt-3">
@@ -294,6 +305,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <style scoped lang="scss">

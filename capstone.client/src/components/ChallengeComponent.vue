@@ -38,6 +38,7 @@ import { AppState } from '../AppState'
 import { computed } from 'vue'
 import goalChallengeComponent from '../components/GoalChallengeComponent'
 import { challengeService } from '../services/ChallengeService'
+import swal from 'sweetalert'
 export default {
   name: 'ChallengeComponent',
   props: ['challengeProps'],
@@ -47,9 +48,33 @@ export default {
       profile: computed(() => AppState.profile),
       goals: computed(() => AppState.goals),
       leaveChallenge(id, challenge) {
-        challengeService.leaveChallenge(id, challenge)
+        swal({
+          title: 'Are you sure?',
+          text: 'Once you leave, you can no longer participate!',
+          icon: 'warning',
+          buttons: true,
+          dangerMode: true
+        })
+          .then((willDelete) => {
+            if (willDelete) {
+              challengeService.leaveChallenge(id, challenge)
+
+              swal('You have left the challenge!', {
+                icon: 'https://www.miqols.org/toolbox2/isp/img/toggle_checked.png'
+
+              })
+            } else {
+              swal('Your challenge is still active, go win!')
+            }
+          })
       },
       deleteChallenge(id) {
+        swal({
+          title: 'Deleted!',
+          text: 'You deleted the challenge',
+          icon: 'error',
+          button: 'Dismiss'
+        })
         challengeService.deleteChallenge(id)
       }
     }
