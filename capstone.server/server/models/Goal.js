@@ -13,12 +13,10 @@ const Goal = new Schema(
     completed: { type: Boolean, default: false },
     participantId: { type: String, required: false },
     startDate: { type: Date, required: true },
-
+    recurring: { type: Boolean, default: true },
     endDate: { type: Date, required: true },
     lastDate: {},
-
     timeFrame: { type: String, required: false }
-
   },
 
   { timestamps: true, toJSON: { virtuals: true } }

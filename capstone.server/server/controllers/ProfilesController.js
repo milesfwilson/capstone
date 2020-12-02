@@ -12,6 +12,9 @@ export class ProfilesController extends BaseController {
       .get('/all', this.getAllProfiles)
       .get('/', this.getUserProfile)
       .put('/:profileId', this.editProfile)
+      .put('/:profileId/completed', this.completed)
+      .put('/:profileId/failures', this.fail)
+      .put('/:profileId/', this.editProfile)
   }
 
   async getUserProfile(req, res, next) {
@@ -20,6 +23,22 @@ export class ProfilesController extends BaseController {
       res.send(profile)
     } catch (error) {
       next(error)
+    }
+  }
+
+  async completed(req, res, next) {
+    try {
+      res.send(await profilesService.completed(req.params.profileId, req.query))
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  async fail(req, res, next) {
+    try {
+      res.send(await profilesService.fail(req.params.profileId, req.query))
+    } catch (err) {
+      next(err)
     }
   }
 

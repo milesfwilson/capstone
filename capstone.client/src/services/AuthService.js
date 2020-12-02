@@ -2,6 +2,7 @@ import { initialize } from '@bcwdev/auth0provider-client'
 import { AppState } from '../AppState'
 import { audience, clientId, domain } from '../AuthConfig'
 import router from '../router'
+import { logger } from '../utils/Logger'
 import { setBearer } from './AxiosService'
 import { challengeService } from './ChallengeService'
 import { goalService } from './GoalService'
@@ -27,5 +28,7 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   await goalService.getGoals()
   await challengeService.getChallenges()
   await profileService.getAllProfiles()
+  await goalService.updateGoal()
+  logger.log(AppState.profile)
   // NOTE if there is something you want to do once the user is authenticated, place that here
 })

@@ -1,4 +1,6 @@
 import { dbContext } from '../db/DbContext'
+import { BadRequest } from '../utils/Errors'
+import Profile from '../models/Profile'
 
 // Private Methods
 
@@ -62,8 +64,6 @@ class ProfileService {
     return profiles
   }
 
-
-
   /**
    * Returns a user profile from the Auth0 user object
    *
@@ -79,6 +79,20 @@ class ProfileService {
     profile = await createProfileIfNeeded(profile, user)
     await mergeSubsIfNeeded(profile, user)
     return profile
+  }
+
+  async completed(id, query) {
+    if (query.completed != 1) {
+      throw new BadRequest('no')
+    }
+    return await dbContext.Profile.findByIdAndUpdate(id, { $inc: { completed: query.completed } }, { new: true }).populate('profile')
+  }
+
+  async fail(id, query) {
+    if (query.failures != 1) {
+      throw new BadRequest('no')
+    }
+    return await dbContext.Profile.findByIdAndUpdate(id, { $inc: { failures: query.failures } }, { new: true }).populate('profile')
   }
 
   /**
