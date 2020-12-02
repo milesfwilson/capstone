@@ -26,7 +26,7 @@
       </div>
       <div class="row collapse" :id="'collapse' + goalProps.id">
         <div class="col-12 d-flex justify-content-between">
-          <editGoalComponent :editgoal-props="goalProps" />
+          <!-- <editGoalComponent :editgoal-props="goalProps" /> -->
           <div class="d-flex">
             <div class="d-flex" v-if="goalProps.counter">
               <button class="btn grow" @click="decrement(goalProps.id, goalProps)">
@@ -55,7 +55,8 @@
 import { goalService } from '../services/GoalService'
 import { computed } from 'vue'
 import { AppState } from '../AppState'
-import EditGoalComponent from '../components/EditGoalComponent'
+import swal from 'sweetalert'
+// import EditGoalComponent from '../components/EditGoalComponent'
 export default {
   name: 'GoalComponent',
   props: ['goalProps'],
@@ -66,7 +67,25 @@ export default {
       sortByStatus: computed(() => AppState.sortByStatus),
       challenges: computed(() => AppState.challenges),
       deleteGoal(id) {
-        goalService.deleteGoal(id)
+        swal({
+          title: 'Are you sure?',
+          text: 'Once deleted, your goal will be gone forever!',
+          icon: 'warning',
+          buttons: true,
+          dangerMode: true,
+          position: 'top-end'
+        })
+          .then((willDelete) => {
+            if (willDelete) {
+              goalService.deleteGoal(id)
+              swal('Your goal has been deleted!', {
+                icon: 'https://www.miqols.org/toolbox2/isp/img/toggle_checked.png'
+
+              })
+            } else {
+              swal('Your goal is safe! Keep working on it!')
+            }
+          })
       },
       crossOffGoal(id, goal) {
         goalService.crossOffGoal(id, goal)
@@ -79,7 +98,7 @@ export default {
       }
     }
   },
-  components: { EditGoalComponent }
+  components: { }
 }
 </script>
 

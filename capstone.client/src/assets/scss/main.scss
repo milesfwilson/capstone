@@ -25,3 +25,41 @@ main {
 .bg-muted {
   background-color: rgba(128, 128, 128, 0.564);
 }
+
+.swal-modal {
+border-radius: 50px;
+background-color: #313130;
+
+}
+
+.swal-modal button {
+background-color: #3a7b86;
+border-radius: 25px;
+color: white;
+}
+
+.swal-modal button:hover {
+  background-color: white;
+color: #3a7b86;
+}
+
+.swal-modal img {
+  height: 15vh;
+  animation: img-float 3s ease-in-out infinite;
+}
+
+@keyframes img-float{
+  0%,100% {
+    transform: translateY(-20px)rotate(5deg);
+  }
+  50% {
+    transform: translateY(0px)rotate(-5deg);
+  }
+}
+.swal-text {
+  color:rgba(255, 255, 255, 0.911);
+}
+
+.swal-title {
+  color:rgba(255, 255, 255, 0.911);
+}

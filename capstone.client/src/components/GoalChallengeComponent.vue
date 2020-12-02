@@ -34,7 +34,7 @@
               </button>
             </div>
 
-            <div class="d-flex rounded my-auto">
+            <div class="d-flex rounded my-auto py-3">
               <div class="progressBar bg-success left" :class="{'right': goalProps.progress == goalProps.counter}" :style="'width:' + goalProps.progress/goalProps.counter*100+'px'">
               </div>
               <div class="progressBar bg-muted right" :class="{'left': goalProps.progress == 0}" :style="'width:' + (100-(goalProps.progress/goalProps.counter*100))+'px'">
@@ -78,6 +78,7 @@ import { challengeService } from '../services/ChallengeService'
 import { goalService } from '../services/GoalService'
 import { AppState } from '../AppState'
 import { computed } from 'vue'
+import swal from 'sweetalert'
 export default {
   name: 'GoalChallengeComponent',
   props: ['goalProps', 'challengeProps'],
@@ -85,15 +86,51 @@ export default {
     return {
       profile: computed(() => AppState.profile),
       acceptChallenge(goal, challenge) {
+        swal({
+          title: 'Challenge Accepted!',
+          text: 'Now you share the same goal',
+          icon: 'https://www.miqols.org/toolbox2/isp/img/toggle_checked.png',
+          button: 'Dismiss'
+        })
         challengeService.acceptChallenge(goal, challenge)
       },
       rejectChallenge(id, challenge) {
+        swal({
+          title: 'Rejected!',
+          text: 'You declined the challenge',
+          icon: 'error',
+          button: 'Dismiss'
+        })
         challengeService.rejectChallenge(id, challenge)
       },
       leaveChallenge(id, challenge) {
-        challengeService.leaveChallenge(id, challenge)
+        swal({
+          title: 'Are you sure?',
+          text: 'Once you leave, you can no longer participate!',
+          icon: 'warning',
+          buttons: true,
+          dangerMode: true
+        })
+          .then((willDelete) => {
+            if (willDelete) {
+              challengeService.leaveChallenge(id, challenge)
+
+              swal('You have left the challenge!', {
+                icon: 'https://www.miqols.org/toolbox2/isp/img/toggle_checked.png'
+
+              })
+            } else {
+              swal('Your challenge is still active, go win!')
+            }
+          })
       },
       deleteChallenge(id) {
+        swal({
+          title: 'Deleted!',
+          text: 'You deleted the challenge',
+          icon: 'error',
+          button: 'Dismiss'
+        })
         challengeService.deleteChallenge(id)
       },
       increment(id, goal) {
