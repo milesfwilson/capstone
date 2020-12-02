@@ -27,5 +27,6 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   await goalService.getGoals()
   await challengeService.getChallenges()
   await profileService.getAllProfiles()
+  await goalService.updateGoal()
   // NOTE if there is something you want to do once the user is authenticated, place that here
 })
