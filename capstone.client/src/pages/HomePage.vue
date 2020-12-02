@@ -42,7 +42,7 @@
 <script>
 import GoalsComponent from '../components/GoalsComponent'
 
-import { reactive, computed, onMounted } from 'vue'
+import { reactive, computed } from 'vue'
 import { goalService } from '../services/GoalService'
 import { AppState } from '../AppState'
 
@@ -55,7 +55,6 @@ export default {
       newGoal: {
       }
     })
-    onMounted(() => goalService.updateGoal())
     return {
       state,
       profile: computed(() => AppState.profile),
