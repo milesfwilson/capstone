@@ -206,8 +206,7 @@ export default {
   setup() {
     const state = reactive({
       newGoal: {
-        lastDate: DateTime.local().plus({ minute: 5 })
-
+        startDate: DateTime.local()
       }
     })
     return {
