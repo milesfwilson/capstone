@@ -9,6 +9,7 @@ class GoalService {
     try {
       const res = await api.get('/api/goals')
       AppState.goals = res.data
+      AppState.myGoals = res.data.filter(i => (AppState.profile.id === i.creatorId))
       logger.log(AppState.goals)
     } catch (error) {
       logger.error(error)
