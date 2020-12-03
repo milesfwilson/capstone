@@ -8,7 +8,11 @@
             <h3 class="text-center text-light">
               {{ profile.email.split('@').splice(0,1).join('') }}
             </h3>
-            <a href="" class="no-decoration text-light" @click="logout">Logout</a>
+            <div class="text-light"
+                 @click="logout"
+            >
+              Logout
+            </div>
           </div>
         </div>
         <div class="row mt-3 height">

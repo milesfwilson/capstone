@@ -3,23 +3,23 @@
     <div class="row">
       <div class="col-3"></div>
       <div class="col-6 d-flex justify-content-center">
-        <router-link :to="{ name: 'Create' }" class="mt-3 btn text-light">
+        <router-link :to="{ name: 'Create' }" class=" btn text-light">
           <h3>
             Create Goal
           </h3>
         </router-link>
       </div>
-      <div class="col-3 d-flex justify-content-end">
-        <div class="dropdown">
-          <button class="btn btn-outline-light dropdown-toggle radius"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-          >
-            Sort
-          </button>
+      <div class="dropdown">
+        <button class="btn mt-3 btn-outline-light dropdown-toggle radius"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+        >
+          Sort
+        </button>
+        <div class="col-3 d-flex justify-content-end">
           <div class="dropdown-menu bg-transparent border-0" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item bg-light text-dark radius my-1" href="#" @click.prevent="sort('finance')">
               <i class="fa fa-circle-o text-success" aria-hidden="true"></i>

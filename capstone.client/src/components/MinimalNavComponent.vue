@@ -5,7 +5,7 @@
         <div class="radius p-2 shadow-lg border-height ">
           <div class="d-flex text-dark shadow-lg opacity radius justify-content-between p-1">
             <router-link class="text-dark" :to="{ name: 'Home' }">
-              <i class="fa fa-circle-o text-dark fa-2x grow" aria-hidden="true"></i>
+              <i class="fa fa-home text-dark fa-2x grow" aria-hidden="true"></i>
             </router-link>
             <router-link :to="{ name: 'Challenges' }" class="text-dark d-flex no-decoration">
               <div class="bauble"></div>
@@ -20,10 +20,9 @@
             <router-link v-if="profile.picture" :to="{ name: 'Profile' }">
               <img :src="profile.picture" height="35" class="rounded-circle grow" alt="">
             </router-link>
-            <a v-else class="text-dark" @click="login">
+            <a v-else class="text-dark" @click.prevent="login()">
               <i class="fas fa-sign-in-alt grow fa-2x"></i>
             </a>
-            <!-- <div class="bauble"></div> -->
             <router-link class="text-dark padding" :to="{ name: 'About' }">
               <i class="fa fa-info-circle text-dark fa-2x grow" aria-hidden="true"></i>
             </router-link>
