@@ -63,3 +63,13 @@ color: #3a7b86;
 .swal-title {
   color:rgba(255, 255, 255, 0.911);
 }
+
+.grow:hover {
+  transform: scale(1.025);
+  transition: all .20s ease-in-out;
+  opacity: .75;
+  }
+
+  .radius {
+    border-radius: 50px;
+  }

@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon'
 import { reactive } from 'vue'
 
 // NOTE AppState is a reactive object to contain app level data
@@ -20,5 +21,6 @@ export const AppState = reactive({
   reveal: false,
   pending: [],
   checkedChallenges: [],
-  myGoals: []
+  myGoals: [],
+  date: DateTime.local().toISODate()
 })

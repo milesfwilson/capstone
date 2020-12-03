@@ -11,7 +11,7 @@
       </div>
       <div class="col-3 d-flex justify-content-end">
         <div class="dropdown">
-          <button class="btn btn-outline-light dropdown-toggle"
+          <button class="btn btn-outline-light dropdown-toggle radius"
                   type="button"
                   id="dropdownMenuButton"
                   data-toggle="dropdown"
@@ -20,17 +20,37 @@
           >
             Sort
           </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#" @click.prevent="sort('finance')">Finance</a>
-            <a class="dropdown-item" href="#" @click.prevent="sort('health')">Health</a>
-            <a class="dropdown-item" href="#" @click.prevent="sort('mental')">Mental</a>
-            <a class="dropdown-item" href="#" @click.prevent="sort('other')">Other</a>
-            <a class="dropdown-item" href="#" @click.prevent="sort('project')">Project</a>
-            <a class="dropdown-item" href="#" @click.prevent="sort('skill')">Skill</a>
-            <a class="dropdown-item" href="#" @click.prevent="sort('travel')">Travel</a>
-            <a class="dropdown-item" href="#" @click.prevent="sortByStatus(false)">Open</a>
-            <a class="dropdown-item" href="#" @click.prevent="sortByStatus(true)">Completed</a>
-            <a class="dropdown-item" href="#" @click.prevent="sortByStatus('all')">All</a>
+          <div class="dropdown-menu bg-transparent border-0" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item bg-light text-dark radius my-1" href="#" @click.prevent="sort('finance')">
+              <i class="fa fa-circle-o text-success" aria-hidden="true"></i>
+              Finance</a>
+            <a class="dropdown-item bg-light text-dark radius my-1" href="#" @click.prevent="sort('health')">
+              <i class="fa fa-circle-o text-primary" aria-hidden="true"></i>
+              Health</a>
+            <a class="dropdown-item bg-light text-dark radius my-1" href="#" @click.prevent="sort('mental')">
+              <i class="fa fa-circle-o text-secondary" aria-hidden="true"></i>
+              Mental</a>
+            <a class="dropdown-item bg-light text-dark radius my-1" href="#" @click.prevent="sort('other')">
+              <i class="fa fa-circle-o text-info" aria-hidden="true"></i>
+              Other</a>
+            <a class="dropdown-item bg-light text-dark radius my-1" href="#" @click.prevent="sort('project')">
+              <i class="fa fa-circle-o text-danger" aria-hidden="true"></i>
+              Project</a>
+            <a class="dropdown-item bg-light text-dark radius my-1" href="#" @click.prevent="sort('skill')">
+              <i class="fa fa-circle-o text-warning" aria-hidden="true"></i>
+              Skill</a>
+            <a class="dropdown-item bg-light text-dark radius my-1" href="#" @click.prevent="sort('travel')">
+              <i class="fa fa-circle-o text-kody" aria-hidden="true"></i>
+              Travel</a>
+            <a class="dropdown-item bg-light text-dark radius my-1" href="#" @click.prevent="sortByStatus(false)">
+              <i class="fa fa-circle-o" aria-hidden="true"></i>
+              Open</a>
+            <a class="dropdown-item bg-light text-dark radius my-1" href="#" @click.prevent="sortByStatus(true)">
+              <i class="fas fa-times"></i>
+              Completed</a>
+            <a class="dropdown-item bg-light text-dark radius my-1" href="#" @click.prevent="sortByStatus('all')">
+              <i class="fa fa-circle" aria-hidden="true"></i>
+              All</a>
           </div>
         </div>
       </div>
@@ -95,4 +115,9 @@ export default {
   position: fixed;
   width: 0;
 }
+
+.text-kody {
+  color:#3a7b86;
+}
+
 </style>

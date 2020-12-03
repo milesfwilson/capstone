@@ -13,7 +13,7 @@ const Goal = new Schema(
     completed: { type: Boolean, default: false },
     participantId: { type: String, required: false },
     startDate: { type: Date, required: true },
-    recurring: { type: Boolean, default: true },
+    recurring: { type: Boolean, default: false },
     endDate: { type: Date, required: true },
     lastDate: {},
     timeFrame: { type: String, required: false }
