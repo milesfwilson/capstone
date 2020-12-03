@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: $body-bg;
+  background-color: #313130;
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
@@ -27,20 +27,20 @@ main {
 }
 
 .swal-modal {
-border-radius: 50px;
-background-color: #313130;
+  border-radius: 50px;
+  background-color: #313130;
 
 }
 
 .swal-modal button {
-background-color: #3a7b86;
-border-radius: 25px;
-color: white;
+  background-color: #3a7b86;
+  border-radius: 25px;
+  color: white;
 }
 
 .swal-modal button:hover {
   background-color: white;
-color: #3a7b86;
+  color: #3a7b86;
 }
 
 .swal-modal img {
@@ -48,28 +48,36 @@ color: #3a7b86;
   animation: img-float 3s ease-in-out infinite;
 }
 
-@keyframes img-float{
-  0%,100% {
+@keyframes img-float {
+
+  0%,
+  100% {
     transform: translateY(-20px)rotate(5deg);
   }
+
   50% {
     transform: translateY(0px)rotate(-5deg);
   }
 }
+
 .swal-text {
-  color:rgba(255, 255, 255, 0.911);
+  color: rgba(255, 255, 255, 0.911);
 }
 
 .swal-title {
-  color:rgba(255, 255, 255, 0.911);
+  color: rgba(255, 255, 255, 0.911);
 }
 
 .grow:hover {
   transform: scale(1.025);
   transition: all .20s ease-in-out;
   opacity: .75;
-  }
+}
 
-  .radius {
-    border-radius: 50px;
-  }
+.radius {
+  border-radius: 50px;
+}
+
+.no-decoration {
+  text-decoration: none;
+}

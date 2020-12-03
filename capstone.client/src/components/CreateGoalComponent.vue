@@ -62,8 +62,8 @@
       </div>
       <h4>Select Category</h4>
       <div class="row">
-        <div class="col-10 offset-1 d-flex justify-content-around flex-wrap">
-          <label class="btn btn-outline-light m-1"
+        <div class="col-12 d-flex justify-content-around flex-wrap">
+          <label class="btn btn-outline-light m-1 p-1"
                  :class="{'bg-light text-dark': state.newGoal.category ==
                    'mental'}"
           >
@@ -75,7 +75,7 @@
                    v-model="state.newGoal.category"
             > Mental
           </label>
-          <label class="btn btn-outline-light m-1"
+          <label class="btn btn-outline-light m-1 p-1"
                  :class="{'bg-light text-dark': state.newGoal.category ==
                    'finance'}"
           >
@@ -87,7 +87,7 @@
                    v-model="state.newGoal.category"
             > Finance
           </label>
-          <label class="btn btn-outline-light m-1"
+          <label class="btn btn-outline-light m-1 p-1"
                  :class="{'bg-light text-dark': state.newGoal.category ==
                    'health'}"
           >
@@ -99,7 +99,7 @@
                    v-model="state.newGoal.category"
             > Health
           </label>
-          <label class="btn btn-outline-light m-1"
+          <label class="btn btn-outline-light m-1 p-1"
                  :class="{'bg-light text-dark': state.newGoal.category ==
                    'skill'}"
           >
@@ -111,7 +111,7 @@
                    v-model="state.newGoal.category"
             > Skill
           </label>
-          <label class="btn btn-outline-light m-1"
+          <label class="btn btn-outline-light m-1 p-1"
                  :class="{'bg-light text-dark': state.newGoal.category ==
                    'project'}"
           >
@@ -123,7 +123,7 @@
                    v-model="state.newGoal.category"
             > Project
           </label>
-          <label class="btn btn-outline-light m-1"
+          <label class="btn btn-outline-light m-1 p-1"
                  :class="{'bg-light text-dark': state.newGoal.category ==
                    'travel'}"
           >
@@ -135,7 +135,7 @@
                    v-model="state.newGoal.category"
             > Travel
           </label>
-          <label class="btn btn-outline-light m-1"
+          <label class="btn btn-outline-light m-1 p-1"
                  :class="{'bg-light text-dark': state.newGoal.category ==
                    'other'}"
           >
@@ -166,51 +166,51 @@
       </div>
       <transition-group name="fade">
         <span class="row mt-3" v-if="goal.recurring">
-          <div class="col-10 offset-1 d-flex justify-content-around hideMe ">
-            <label class="btn btn-outline-light m-1"
+          <div class="col-12 d-flex justify-content-around hideMe ">
+            <label class="btn btn-outline-light m-1 p-1"
                    :class="{'bg-light text-dark': state.newGoal.timeFrame ==
-                     'daily'}"
+                     'day'}"
             >
               <input type="radio"
-                     value="daily"
-                     name="daily"
-                     id="daily"
+                     value="day"
+                     name="day"
+                     id="day"
                      autocomplete="off"
                      v-model="state.newGoal.timeFrame"
               > Daily
             </label>
-            <label class="btn btn-outline-light m-1"
+            <label class="btn btn-outline-light m-1 p-1"
                    :class="{'bg-light text-dark': state.newGoal.timeFrame ==
-                     'weekly'}"
+                     'week'}"
             >
               <input type="radio"
-                     value="weekly"
-                     name="weekly"
-                     id="weekly"
+                     value="week"
+                     name="week"
+                     id="week"
                      autocomplete="off"
                      v-model="state.newGoal.timeFrame"
               > Weekly
             </label>
-            <label class="btn btn-outline-light m-1"
+            <label class="btn btn-outline-light m-1 pl-1"
                    :class="{'bg-light text-dark': state.newGoal.timeFrame ==
-                     'monthly'}"
+                     'month'}"
             >
               <input type="radio"
-                     value="monthly"
-                     name="monthly"
-                     id="monthly"
+                     value="month"
+                     name="month"
+                     id="month"
                      autocomplete="off"
                      v-model="state.newGoal.timeFrame"
               > Monthly
             </label>
-            <label class="btn btn-outline-light m-1"
+            <label class="btn btn-outline-light m-1 p-1"
                    :class="{'bg-light text-dark': state.newGoal.timeFrame ==
-                     'yearly'}"
+                     'year'}"
             >
               <input type="radio"
-                     value="yearly"
-                     name="yearly"
-                     id="yearly"
+                     value="year"
+                     name="year"
+                     id="year"
                      autocomplete="off"
                      v-model="state.newGoal.timeFrame"
               > Yearly
@@ -238,7 +238,7 @@
         <div class="row">
           <div class="col-12 d-flex justify-content-center">
             <input type="number"
-                   class="p-2 radius-25 my-2 bg-light text-dark border-0 w-25 text-center"
+                   class="p-2 radius-25 my-2 bg-light text-dark border-0 w-50 text-center"
                    placeholder="How many?"
                    v-model="state.newGoal.counter"
                    v-if="goal.counter"

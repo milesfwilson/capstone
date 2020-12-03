@@ -8,9 +8,7 @@
       <div class="row">
         <div class="col d-flex justify-content-center">
           <button type="submit" class="btn btn-outline-light radius-25 my-2">
-            <h4>
-              Send Request
-            </h4>
+            Send Request
           </button>
         </div>
       </div>

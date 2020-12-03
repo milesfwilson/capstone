@@ -34,6 +34,7 @@
 <script>
 import { computed } from 'vue'
 import { AppState } from '../AppState'
+import swal from 'sweetalert'
 // import goalChallengeComponent from '../components/GoalChallengeComponent'
 import { challengeService } from '../services/ChallengeService'
 export default {
@@ -45,6 +46,12 @@ export default {
       profile: computed(() => AppState.profile),
       goals: computed(() => AppState.goals),
       deleteChallenge(id) {
+        swal({
+          title: 'Deleted!',
+          text: 'You deleted the challenge',
+          icon: 'error',
+          button: 'Dismiss'
+        })
         challengeService.deleteChallenge(id)
       }
     }
