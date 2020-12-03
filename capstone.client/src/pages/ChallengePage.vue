@@ -1,7 +1,7 @@
 <template>
   <div class="challengePage container-fluid bg-dark text-light">
     <div class="row">
-      <div class="col-10 offset-1">
+      <div class="col-12">
         <h3 class="text-center">
           Pending Challenges
         </h3>
@@ -10,7 +10,7 @@
     </div>
 
     <div class="row">
-      <div class="col-10 offset-1">
+      <div class="col-12">
         <h3 class="text-center">
           Challenges
         </h3>
@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-10 offset-1">
+      <div class="col-12">
         <h3 class="text-center">
           Rejected Challenges
         </h3>

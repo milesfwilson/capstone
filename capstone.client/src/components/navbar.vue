@@ -1,7 +1,9 @@
 <template>
   <nav class="navbar navbar-dark bg-dark">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <h3>moment</h3>
+      <p class="header-font">
+        m o m e n t
+      </p>
       <div class="d-flex bg-circle ml-2 text-center" v-if="pending.length > 0">
         <h6 class="text-light m-auto">
           {{ pending.length }}
@@ -9,7 +11,6 @@
       </div>
     </router-link>
   </nav>
-  <!-- <div class="color"></div> -->
 </template>
 
 <script>
@@ -70,4 +71,15 @@ a:hover {
   .color{
     border-bottom: 5px solid #3a7a86;
   }
+
+  .header-font{
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-weight: 100;
+  }
+
+  .sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
 </style>
