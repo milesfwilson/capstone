@@ -23,6 +23,6 @@ export default {
 
 <style lang="scss" scoped>
 .height {
-  height: 17vh;
+  height: 40vh;
 }
 </style>

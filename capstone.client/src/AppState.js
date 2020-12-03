@@ -22,5 +22,6 @@ export const AppState = reactive({
   pending: [],
   checkedChallenges: [],
   myGoals: [],
-  date: DateTime.local().toISODate()
+  date: DateTime.local().toISODate(),
+  sortByTimeFrame: 'day'
 })

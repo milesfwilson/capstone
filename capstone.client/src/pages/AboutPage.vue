@@ -24,7 +24,7 @@
             It is scientifically proven that you have a better chance of accomplishing your goals if you have them documented. Our goal is to help you achieve them by allowing you to keep track of each goal, update your goals, and challenge other to help push you to accomplish each and every goal.
           </p>
         </div>
-        <div class="row bg-light text-dark pt-3">
+        <div class="row bg-light text-dark color">
           <div class="col-10 offset-1">
             <h5>Steps to take:</h5>
             <p>
@@ -71,7 +71,11 @@ export default {
   background-size: cover;
   background-repeat: no-repeat;
   background-position:center;
-  height: 25vh;
+  height: 250px;
+}
 
+.color{
+  border-top: 5px solid #3a7a86;
+  border-bottom: 5px solid #3a7a86;
 }
 </style>

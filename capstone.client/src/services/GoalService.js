@@ -90,7 +90,7 @@ class GoalService {
     try {
       const now = await DateTime.local()
       AppState.goals.forEach(async g => {
-        if (DateTime.fromISO(g.startDate) < now && g.timeFrame === 'daily' && DateTime.fromISO(g.endDate) > now && g.creatorId === AppState.profile.id && g.recurring) {
+        if (DateTime.fromISO(g.startDate) < now && g.timeFrame === 'day' && DateTime.fromISO(g.endDate) > now && g.creatorId === AppState.profile.id && g.recurring) {
           if (g.progress === g.counter) {
             await api.put('/api/goals/' + g._id, { progress: 0, completed: false, startDate: DateTime.fromISO(g.startDate).plus({ day: 1 }) })
             await api.put('/profile/' + g.creatorId + '/completed?completed=1')
@@ -98,7 +98,7 @@ class GoalService {
             await api.put('/api/goals/' + g._id, { progress: 0, completed: false, startDate: DateTime.fromISO(g.startDate).plus({ day: 1 }) })
             await api.put('/profile/' + g.creatorId + '/failures?failures=1')
           }
-        } else if (DateTime.fromISO(g.startDate) < now && g.timeFrame === 'weekly' && DateTime.fromISO(g.endDate) > now && g.creatorId === AppState.profile.id && g.recurring) {
+        } else if (DateTime.fromISO(g.startDate) < now && g.timeFrame === 'week' && DateTime.fromISO(g.endDate) > now && g.creatorId === AppState.profile.id && g.recurring) {
           if (g.progress === g.counter) {
             await api.put('/api/goals/' + g._id, { progress: 0, completed: false, startDate: DateTime.fromISO(g.startDate).plus({ week: 1 }) })
             await api.put('/profile/' + g.creatorId + '/completed?completed=1')
@@ -106,7 +106,7 @@ class GoalService {
             await api.put('/api/goals/' + g._id, { progress: 0, completed: false, startDate: DateTime.fromISO(g.startDate).plus({ week: 1 }) })
             await api.put('/profile/' + g.creatorId + '/failures?failures=1')
           }
-        } else if (DateTime.fromISO(g.startDate) < now && g.timeFrame === 'monthly' && DateTime.fromISO(g.endDate) > now && g.creatorId === AppState.profile.id && g.recurring) {
+        } else if (DateTime.fromISO(g.startDate) < now && g.timeFrame === 'month' && DateTime.fromISO(g.endDate) > now && g.creatorId === AppState.profile.id && g.recurring) {
           if (g.progress === g.counter) {
             await api.put('/api/goals/' + g._id, { progress: 0, completed: false, startDate: DateTime.fromISO(g.startDate).plus({ month: 1 }) })
             await api.put('/profile/' + g.creatorId + '/completed?completed=1')
@@ -114,7 +114,7 @@ class GoalService {
             await api.put('/api/goals/' + g._id, { progress: 0, completed: false, startDate: DateTime.fromISO(g.startDate).plus({ month: 1 }) })
             await api.put('/profile/' + g.creatorId + '/failures?failures=1')
           }
-        } else if (DateTime.fromISO(g.startDate) < now && g.timeFrame === 'yearly' && DateTime.fromISO(g.endDate) > now && g.creatorId === AppState.profile.id && g.recurring) {
+        } else if (DateTime.fromISO(g.startDate) < now && g.timeFrame === 'year' && DateTime.fromISO(g.endDate) > now && g.creatorId === AppState.profile.id && g.recurring) {
           if (g.progress === g.counter) {
             await api.put('/api/goals/' + g._id, { progress: 0, completed: false, startDate: DateTime.fromISO(g.startDate).plus({ year: 1 }) })
             await api.put('/profile/' + g.creatorId + '/completed?completed=1')
