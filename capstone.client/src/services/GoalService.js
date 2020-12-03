@@ -24,6 +24,11 @@ class GoalService {
         // @ts-ignore
         newGoal.participantId = AppState.activeChallenge.participantId
       }
+
+      if (newGoal.timeFrame) {
+        newGoal.recurring = true
+      }
+
       const res = await api.post('/api/goals', newGoal)
       AppState.goals = res.data
       this.getGoals()

@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <h3>Capstone</h3>
+      <h3>moment</h3>
       <div class="d-flex bg-circle ml-2 text-center" v-if="pending.length > 0">
         <h6 class="text-light m-auto">
           {{ pending.length }}
@@ -22,24 +22,9 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <router-link :to="{ name: 'Home' }" class="nav-link">
-            Home
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link :to="{ name: 'About' }" class="nav-link">
-            About
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link :to="{ name: 'Create' }" class="nav-link">
-            Create
-          </router-link>
-        </li>
-        <li class="nav-item">
           <router-link :to="{ name: 'Challenges' }" class="nav-link">
             <div class="d-flex">
-              Challenges
+              Challenge
               <div class="d-flex bg-circle ml-2 text-center" v-if="pending.length > 0">
                 <h6 class="text-light m-auto">
                   {{ pending.length }}

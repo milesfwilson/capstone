@@ -14,7 +14,11 @@
 
           <div v-else class=" mr-2 " style="width: 3px">
           </div>
-          <h4 :class="{'completed':goalProps.completed}" class="my-auto grow" @click="crossOffGoal(goalProps.id, goalProps)">
+          <h4 :class="{'completed':goalProps.completed}" class="my-auto grow expired" v-if="(Number(goalProps.endDate.split('-').join('').split('T').splice(0,1).join(''))) < (Number(date.split('-').join('')))">
+            {{ goalProps.title }}
+          </h4>
+
+          <h4 :class="{'completed':goalProps.completed}" class="my-auto grow" @click="crossOffGoal(goalProps.id, goalProps)" v-if="(Number(goalProps.endDate.split('-').join('').split('T').splice(0,1).join(''))) > (Number(date.split('-').join('')))">
             {{ goalProps.title }}
           </h4>
         </div>
@@ -29,15 +33,14 @@
           <!-- <editGoalComponent :editgoal-props="goalProps" /> -->
           <div class="d-flex">
             <div class="d-flex" v-if="goalProps.counter">
-              <button class="btn grow" @click="decrement(goalProps.id, goalProps)">
+              <button class="btn grow" @click="decrement(goalProps.id, goalProps)" v-show="(Number(goalProps.endDate.split('-').join('').split('T').splice(0,1).join(''))) > (Number(date.split('-').join('')))">
                 <i class="fa fa-minus-circle text-light" aria-hidden="true"></i>
               </button>
 
               <h6 class="my-auto px-2">
                 {{ goalProps.progress }} / {{ goalProps.counter }}
               </h6>
-
-              <button class="btn grow" @click="increment(goalProps.id, goalProps)">
+              <button class="btn grow" @click="increment(goalProps.id, goalProps)" v-show="(Number(goalProps.endDate.split('-').join('').split('T').splice(0,1).join(''))) > (Number(date.split('-').join('')))">
                 <i class="fa fa-plus-circle text-light" aria-hidden="true"></i>
               </button>
             </div>
@@ -66,6 +69,7 @@ export default {
       sort: computed(() => AppState.sort),
       sortByStatus: computed(() => AppState.sortByStatus),
       challenges: computed(() => AppState.challenges),
+      date: computed(() => AppState.date),
       deleteGoal(id) {
         swal({
           title: 'Are you sure?',
@@ -116,6 +120,10 @@ export default {
   transform: scale(1.025);
   transition: all .20s ease-in-out;
   opacity: .75;
+  }
+
+  .expired {
+    color: gray;
   }
 
 </style>
