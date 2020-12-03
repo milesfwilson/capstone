@@ -1,43 +1,28 @@
 <template>
   <div class="about container-fluid">
-    <div class="row mt-3">
-      <div class="col-4">
-        <img class="rounded-circle img-fluid" :src="profile.picture" alt="" />
-      </div>
-      <div class="col-8 d-flex">
-        <h3 class="my-auto text-light">
-          {{ profile.name }}
-        </h3>
-      </div>
-    </div>
-    <div class="row mt-3 bg-dark">
-      <div class="col-6 d-flex">
-        <h5 class="text-success my-auto py-2">
-          Goals Completed: {{ profile.completed }}
-        </h5>
-      </div>
-      <div class="col-6 d-flex">
-        <h5 class="text-danger my-auto py-2">
-          Goals in Progress:
-        </h5>
-      </div>
-    </div>
-    <div class="row mt-3">
-      <img src="https://heap.io/wp-content/uploads/2017/11/interactive-line-graph.png" class="img-fluid" alt="">
-    </div>
-    <div class="row mt-3">
-      <div class="col-12">
-        <h2 class="text-center text-light">
-          See Goals
-        </h2>
-      </div>
-    </div>
-    <ul>
-      <active-goals-component v-for="goal in activeGoals" :key="goal" :goal-props="goal" />
-    </ul>
     <div class="row">
-      <div class="col-12 text-center">
-        <h2>Go to Challenges</h2>
+      <div class="col-8 offset-2">
+        <div class="row" v-if="profile.picture">
+          <div class="col-12">
+            <img class="rounded-circle" height="150" :src="profile.picture" alt="" />
+            <h3 class="text-center text-light">
+              {{ profile.email.split('@').splice(0,1).join('') }}
+            </h3>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-12 d-flex">
+            <div :style="'width:' + 1 / myGoals.length * 100 + '%'" v-for="goal in myGoals" :key="goal.id" class="align-self-end">
+              <div class="bg-success graph grow" :style="'height:' + goal.progress / goal.counter * 100 + 'px'">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12" v-if="profile.completed > 0">
+            {{ (profile.completed) / (profile.completed + profile.failures) * 100 }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -46,14 +31,15 @@
 <script>
 import { computed } from 'vue'
 import { AppState } from '../AppState'
-import ActiveGoalsComponent from '../components/ActiveGoalsComponent.vue'
+
 export default {
-  components: { ActiveGoalsComponent },
+  components: { },
   name: 'Profile',
   setup() {
     return {
       profile: computed(() => AppState.profile),
-      activeGoals: computed(() => AppState.goals)
+      activeGoals: computed(() => AppState.goals),
+      myGoals: computed(() => AppState.myGoals)
 
     }
   }
@@ -61,5 +47,9 @@ export default {
 </script>
 
 <style scoped>
-
+.graph {
+  width: 80%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
 </style>

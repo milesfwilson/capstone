@@ -9,15 +9,16 @@
           <router-link :to="{ name: 'Challenges' }" class="text-dark d-flex no-decoration">
             <div class="bauble"></div>
             <i class="fas fa-user-friends text-dark fa-3x grow"></i>
-            <div v-if="pending.length > 0" class="rounded-circle bauble border border-dark d-flex align-self-end ml-1">
-              <h6 class="small m-auto">
+            <div v-if="pending.length > 0" class="rounded-circle bauble  bg-danger d-flex align-self-end ml-1">
+              <h6 class="small m-auto text-light">
                 {{ pending.length }}
               </h6>
             </div>
             <div v-else class="bauble"></div>
           </router-link>
-
-          <img v-if="profile.picture" :src="profile.picture" height="50" class="rounded-circle grow" alt="">
+          <router-link v-if="profile.picture" :to="{ name: 'Profile' }">
+            <img :src="profile.picture" height="50" class="rounded-circle grow" alt="">
+          </router-link>
           <a v-else class="text-dark" @click="login">
             <i class="fas fa-sign-in-alt grow fa-3x"></i>
           </a>
