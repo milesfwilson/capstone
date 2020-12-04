@@ -167,7 +167,7 @@
       <transition-group name="fade">
         <span class="row mt-3" v-if="goal.recurring">
           <div class="col-12 d-flex justify-content-around hideMe ">
-            <label class="btn btn-outline-light m-1 p-1"
+            <label class="btn btn-outline-light m-1"
                    :class="{'bg-light text-dark': state.newGoal.timeFrame ==
                      'day'}"
             >
@@ -179,7 +179,7 @@
                      v-model="state.newGoal.timeFrame"
               > Daily
             </label>
-            <label class="btn btn-outline-light m-1 p-1"
+            <label class="btn btn-outline-light m-1"
                    :class="{'bg-light text-dark': state.newGoal.timeFrame ==
                      'week'}"
             >
@@ -191,7 +191,7 @@
                      v-model="state.newGoal.timeFrame"
               > Weekly
             </label>
-            <label class="btn btn-outline-light m-1 pl-1"
+            <label class="btn btn-outline-light m-1"
                    :class="{'bg-light text-dark': state.newGoal.timeFrame ==
                      'month'}"
             >
@@ -203,7 +203,7 @@
                      v-model="state.newGoal.timeFrame"
               > Monthly
             </label>
-            <label class="btn btn-outline-light m-1 p-1"
+            <label class="btn btn-outline-light m-1"
                    :class="{'bg-light text-dark': state.newGoal.timeFrame ==
                      'year'}"
             >

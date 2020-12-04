@@ -4,15 +4,17 @@
       <div class="col-12">
         <div class="row" v-if="profile.picture">
           <div class="col-12">
-            <img class="rounded-circle" height="150" :src="profile.picture" alt="" />
+            <div class="">
+              <img class="rounded-circle" height="150" :src="profile.picture" alt="" />
+              <div class="d-flex">
+                <!-- <div :style="'width: ' + Math.ceil((profile.failures) / (profile.completed + profile.failures) * 100) + 'px; height: 100px'" class="bg-danger"></div>
+                <div :style="'width: ' + Math.floor((profile.completed) / (profile.completed + profile.failures) * 100) + 'px; height: 100px'" class="bg-success"></div> -->
+              </div>
+            </div>
+
             <h3 class="text-center text-light">
               {{ profile.email.split('@').splice(0,1).join('') }}
             </h3>
-            <div class="text-light"
-                 @click="logout"
-            >
-              Logout
-            </div>
           </div>
         </div>
         <div class="row mt-3 height">
@@ -20,18 +22,14 @@
             <goalGraphComponent v-for="goal in myGoals" :key="goal.id" :goal-props="goal" class="d-flex w-100 justify-content-around" />
           </div>
         </div>
-        <div class="row">
-          <div class="col-12" v-if="profile.completed > 0">
-            {{ (profile.completed) / (profile.completed + profile.failures) * 100 }}
-          </div>
-        </div>
+
         <div class="row my-3">
           <div class="col-12">
             <h4 class="text-light text-center">
               Select goals by frequency
             </h4>
           </div>
-          <div class="col-12 d-flex justify-content-between">
+          <div class="col-12 d-flex justify-content-around">
             <label :class="{'bg-light text-dark': sortByTimeFrame ==
                      'day'}"
                    class="btn btn-outline-light radius"
@@ -66,7 +64,7 @@
           <div class="col-12">
             <div v-for="goal in myGoals" :key="goal.id">
               <div class="row" v-if="(!goal.completed && (goal.timeFrame == sortByTimeFrame))">
-                <h3>
+                <h3 class="ml-5">
                   {{ goal.title }}
                 </h3>
               </div>
