@@ -29,7 +29,7 @@
         <div class="row">
           <div class="col-12 d-flex justify-content-center">
             <div class="" v-if="goalProps.creatorId == profile.id">
-              <button class="btn grow" @click="decrement(goalProps.id, goalProps)">
+              <button class="btn grow" @click="decrement(goalProps.id, goalProps)" v-show="(Number(goalProps.endDate.split('-').join('').split('T').splice(0,1).join(''))) > (Number(date.split('-').join('')))">
                 <i class="fa fa-minus-circle text-dark" aria-hidden="true"></i>
               </button>
             </div>
@@ -41,7 +41,7 @@
               </div>
             </div>
             <div class="" v-if="goalProps.creatorId == profile.id">
-              <button class="btn grow" @click="increment(goalProps.id, goalProps)">
+              <button class="btn grow" @click="increment(goalProps.id, goalProps)" v-show="(Number(goalProps.endDate.split('-').join('').split('T').splice(0,1).join(''))) > (Number(date.split('-').join('')))">
                 <i class="fa fa-plus-circle text-dark" aria-hidden="true"></i>
               </button>
             </div>
@@ -85,6 +85,7 @@ export default {
   setup() {
     return {
       profile: computed(() => AppState.profile),
+      date: computed(() => AppState.date),
       acceptChallenge(goal, challenge) {
         swal({
           title: 'Challenge Accepted!',
