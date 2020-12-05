@@ -1,16 +1,16 @@
 <template>
   <div class="home container-fluid bg-dark text-light">
-    <div class="row">
+    <div class="row" v-if="profile.id">
       <div class="col-3"></div>
       <div class="col-6 d-flex justify-content-center">
         <router-link :to="{ name: 'Create' }" class=" btn text-light">
-          <h3>
+          <h3 :class="{'radius btn btn-outline-light': myGoals.length < 1}">
             Create Goal
           </h3>
         </router-link>
       </div>
       <div class="dropdown">
-        <button class="btn mt-3 btn-outline-light dropdown-toggle radius"
+        <button class="btn mt-2 btn-outline-light dropdown-toggle radius"
                 type="button"
                 id="dropdownMenuButton"
                 data-toggle="dropdown"
@@ -55,6 +55,38 @@
         </div>
       </div>
     </div>
+    <div class="row" v-show="(myGoals.length < 1) && profile.id">
+      <div class="col-12">
+        <ol>
+          <h3>
+            <li>
+              Start by creating a goal 👆🏻
+            </li>
+            <li>
+              Example: "Drink 8 glass of water per day" or "Go to Europe this year"
+            </li>
+            <li>
+              Select when you want to start and end your goal
+            </li>
+            <li>
+              Choose your category
+            </li>
+            <li>
+              Select how often you want to do this goal, ie once a day, week, month, or year
+            </li>
+            <li>
+              Choose how many times you'd like to accomplish your goal
+            </li>
+            <li>
+              Challenge your friends
+            </li>
+            <li>
+              Check your profile to see your progress! 🎉
+            </li>
+          </h3>
+        </ol>
+      </div>
+    </div>
     <goalsComponent />
   </div>
 </template>
@@ -79,6 +111,7 @@ export default {
       state,
       profile: computed(() => AppState.profile),
       goal: computed(() => AppState.newGoal),
+      myGoals: computed(() => AppState.myGoals),
       createGoal(newGoal) {
         goalService.createGoal(state.newGoal)
         // state.newGoal.title = ''

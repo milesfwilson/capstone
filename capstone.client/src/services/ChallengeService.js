@@ -1,15 +1,64 @@
+import { DateTime } from 'luxon'
 import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 import { goalService } from './GoalService'
-
+import { profileService } from './ProfileService'
 class ChallengeService {
   async getChallenges() {
     try {
       const res = await api.get('/api/challenges')
       AppState.challenges = res.data
+      logger.log('challenges', AppState.challenges)
       this.pendingChallenge()
       this.challengeCheck()
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+
+  async updateChallengeScores() {
+    try {
+      let creatorGoal = {}
+      let participantGoal = {}
+      AppState.challenges.forEach(challenge => {
+        AppState.goals.forEach(goal => {
+          if ((goal.challengeId === challenge.id) && (goal.creatorId === challenge.creatorId)) {
+            creatorGoal = goal
+            logger.log(creatorGoal)
+          } else if ((goal.challengeId === challenge.id) && (goal.creatorId === challenge.participantId)) {
+            participantGoal = goal
+            logger.log(participantGoal)
+          }
+        })
+        // NOTE check to see if inside time frame,
+
+        if (((DateTime.fromISO(creatorGoal.endDate) > DateTime.local())) && !challenge.winner) {
+          if (participantGoal.progress > creatorGoal.progress) {
+            challenge.participantScore++
+            logger.log('p score', challenge.participantScore)
+          } else if (participantGoal.progress < creatorGoal.progress) {
+            challenge.creatorScore++
+            logger.log('c score', challenge.creatorScore)
+          }
+        } else if ((DateTime.fromISO(creatorGoal.endDate) < DateTime.local()) && !challenge.winner) {
+          if (challenge.creatorScore > challenge.participantScore) {
+            challenge.winner = creatorGoal.creatorId
+            challenge.loser = participantGoal.creatorId
+            api.put('/profile/' + creatorGoal.creatorId + '/challengesWon?challengesWon=1')
+            api.put('/profile/' + participantGoal.creatorId + '/challengesLost?challengesLost=1')
+          } else if (challenge.creatorScore < challenge.participantScore) {
+            challenge.loser = creatorGoal.creatorId
+            challenge.winner = participantGoal.creatorId
+            api.put('/profile/' + participantGoal.creatorId + '/challengesWon?challengesWon=1')
+            api.put('/profile/' + creatorGoal.creatorId + '/challengesLost?challengesLost=1')
+          }
+        }
+        api.put('/api/challenges/' + challenge.id, challenge)
+      })
+      setTimeout(goalService.getGoals, 125)
+      setTimeout(profileService.getAllProfiles, 125)
+      setTimeout(goalService.updateGoal, 125)
     } catch (error) {
       logger.error(error)
     }
@@ -61,7 +110,7 @@ class ChallengeService {
       AppState.activeChallenger = {}
       this.reveal(true)
       this.challenge(false)
-      this.getChallenges()
+      setTimeout(this.getChallenges, 1000)
     } catch (error) {
       logger.error(error)
     }
@@ -165,8 +214,8 @@ class ChallengeService {
       logger.log(AppState.challenges)
       await api.post('/api/goals/', newGoal)
       logger.log(AppState.goals)
-      this.getChallenges()
-      goalService.getGoals()
+      setTimeout(this.getChallenges, 125)
+      setTimeout(goalService.getGoals, 125)
     } catch (error) {
       logger.error(error)
     }
@@ -178,7 +227,7 @@ class ChallengeService {
       body.accepted = false
       await api.put('/api/challenges/' + challengeId, body)
       logger.log(AppState.challenges)
-      this.getChallenges()
+      setTimeout(this.getChallenges, 125)
     } catch (error) {
       logger.error(error)
     }
@@ -190,7 +239,7 @@ class ChallengeService {
       body.accepted = false
       await api.put('/api/challenges/' + challengeId, body)
       logger.log(AppState.challenges)
-      this.getChallenges()
+      setTimeout(this.getChallenges, 125)
     } catch (error) {
       logger.error(error)
     }

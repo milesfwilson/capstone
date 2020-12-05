@@ -12,7 +12,11 @@ const Challenge = new Schema(
     participantImg: { type: String, required: false },
     participantName: { type: String, required: false },
     accepted: { type: Boolean, default: false },
-    rejected: { type: Boolean, default: false }
+    rejected: { type: Boolean, default: false },
+    winner: { },
+    loser: { },
+    participantScore: { type: Number, default: 0 },
+    creatorScore: { type: Number, default: 0 }
     // wager: { type: String, required: true },
 
   },

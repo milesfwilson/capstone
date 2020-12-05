@@ -7,8 +7,8 @@
             <div class="">
               <img class="rounded-circle" height="150" :src="profile.picture" alt="" />
               <div class="d-flex">
-                <!-- <div :style="'width: ' + Math.ceil((profile.failures) / (profile.completed + profile.failures) * 100) + 'px; height: 100px'" class="bg-danger"></div>
-                <div :style="'width: ' + Math.floor((profile.completed) / (profile.completed + profile.failures) * 100) + 'px; height: 100px'" class="bg-success"></div> -->
+                <div :style="'width: ' + Math.ceil((profile.failures) / (profile.completed + profile.failures) * 100) + 'px; height: 100px'" class="bg-danger"></div>
+                <div :style="'width: ' + Math.floor((profile.completed) / (profile.completed + profile.failures) * 100) + 'px; height: 100px'" class="bg-success"></div>
               </div>
             </div>
 

@@ -44,7 +44,7 @@ class GoalService {
   async deleteGoal(goalId) {
     try {
       await api.delete('/api/goals/' + goalId)
-      this.getGoals()
+      setTimeout(this.getGoals, 1000)
     } catch (error) {
       logger.error(error)
     }
@@ -70,6 +70,18 @@ class GoalService {
     try {
       const res = await api.put('/api/goals/' + goalId, body)
       AppState.goals = res.data
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+
+  async renewChallenge(body, goals) {
+    try {
+      goals.forEach(goal => {
+        api.put('/api/goals/' + goal.id, body)
+        logger.log(goal.endDate)
+      })
+      setTimeout(this.getGoals, 125)
     } catch (error) {
       logger.error(error)
     }
