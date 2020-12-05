@@ -16,6 +16,7 @@ class ProfileService {
     try {
       const res = await api.get('/profile/all')
       AppState.profiles = res.data
+      logger.log(AppState.profiles)
     } catch (err) {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
     }

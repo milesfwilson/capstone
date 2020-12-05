@@ -14,9 +14,17 @@
     <div class="row justify-content-around my-2" v-if="(goalProps.challengeId == challengeProps.id) && (challengeProps.accepted)">
       <div class="col-12">
         <div class="row">
-          <div class="col-12 d-flex justify-content-center">
+          <div class="col-12">
             <img :src="challengeProps.creatorImg" class="rounded-circle shadow" height="100" alt="" v-if="challengeProps.creatorId == goalProps.creatorId">
             <img :src="challengeProps.participantImg" class="rounded-circle shadow" height="100" alt="" v-if="challengeProps.participantId == goalProps.creatorId">
+            <h4 v-if="(Number(goalProps.endDate.split('-').join('').split('T').splice(0,1).join(''))) < (Number(date.split('-').join(''))) && (challengeProps.winner === goalProps.creatorId)">
+              WINNER!!!
+              🎉
+            </h4>
+            <h4 v-if="(Number(goalProps.endDate.split('-').join('').split('T').splice(0,1).join(''))) < (Number(date.split('-').join(''))) && (challengeProps.loser === goalProps.creatorId)">
+              LOSER!!!
+              🙃
+            </h4>
           </div>
         </div>
         <div class="row">
@@ -58,16 +66,6 @@
             </h6>
           </div>
         </div>
-        <!-- <div class="row">
-          <div class="col-12 d-flex justify-content-center">
-            <button class="btn btn-outline-dark radius-25" v-if="(challengeProps.participantId == profile.id) && (challengeProps.accepted) && (goalProps.creatorId == profile.id)" @click.prevent="leaveChallenge(challengeProps.id, challengeProps)">
-              Leave
-            </button>
-            <button class="btn btn-outline-dark radius-25" v-if="(challengeProps.creatorId == profile.id) && (challengeProps.accepted) && (goalProps.creatorId == profile.id)" @click.prevent="deleteChallenge(challengeProps.id)">
-              Delete
-            </button>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>

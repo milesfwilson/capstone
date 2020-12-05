@@ -95,6 +95,20 @@ class ProfileService {
     return await dbContext.Profile.findByIdAndUpdate(id, { $inc: { failures: query.failures } }, { new: true }).populate('profile')
   }
 
+  async challengesLost(id, query) {
+    if (query.challengesLost != 1) {
+      throw new BadRequest('no')
+    }
+    return await dbContext.Profile.findByIdAndUpdate(id, { $inc: { challengesLost: query.challengesLost } }, { new: true }).populate('profile')
+  }
+
+  async challengesWon(id, query) {
+    if (query.challengesWon != 1) {
+      throw new BadRequest('no')
+    }
+    return await dbContext.Profile.findByIdAndUpdate(id, { $inc: { challengesWon: query.challengesWon } }, { new: true }).populate('profile')
+  }
+
   /**
    * Updates profile with the request body, will only allow changes to editable fields
    *  @param {any} user Auth0 user object

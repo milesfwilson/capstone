@@ -13,6 +13,8 @@ export class ProfilesController extends BaseController {
       .get('/', this.getUserProfile)
       .put('/:profileId', this.editProfile)
       .put('/:profileId/completed', this.completed)
+      .put('/:profileId/challengesWon', this.challengesWon)
+      .put('/:profileId/challengesLost', this.challengesLost)
       .put('/:profileId/failures', this.fail)
       .put('/:profileId/', this.editProfile)
   }
@@ -29,6 +31,22 @@ export class ProfilesController extends BaseController {
   async completed(req, res, next) {
     try {
       res.send(await profilesService.completed(req.params.profileId, req.query))
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  async challengesWon(req, res, next) {
+    try {
+      res.send(await profilesService.challengesWon(req.params.profileId, req.query))
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  async challengesLost(req, res, next) {
+    try {
+      res.send(await profilesService.challengesLost(req.params.profileId, req.query))
     } catch (err) {
       next(err)
     }
