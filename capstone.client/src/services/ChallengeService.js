@@ -25,6 +25,8 @@ class ChallengeService {
       let participantGoal = {}
       AppState.challenges.forEach(challenge => {
         AppState.goals.forEach(goal => {
+          // let timeFrame = goal.timeFrame
+          // let timeCheck = DateTime.fromISO(DateTime.fromISO(goal.startDate.plus({ timeFrame: 1 })))
           if ((goal.challengeId === challenge.id) && (goal.creatorId === challenge.creatorId)) {
             creatorGoal = goal
             logger.log(creatorGoal)
@@ -34,32 +36,33 @@ class ChallengeService {
           }
         })
         // NOTE check to see if inside time frame,
-
-        if (((DateTime.fromISO(creatorGoal.endDate) > DateTime.local())) && !challenge.winner) {
-          if (participantGoal.progress > creatorGoal.progress) {
-            challenge.participantScore++
-            logger.log('p score', challenge.participantScore)
-          } else if (participantGoal.progress < creatorGoal.progress) {
-            challenge.creatorScore++
-            logger.log('c score', challenge.creatorScore)
+        if (DateTime.fromISO(creatorGoal.startDate) < DateTime.local()) {
+          if ((((DateTime.fromISO && (creatorGoal.endDate) > DateTime.local())) && !challenge.winner)) {
+            if (participantGoal.progress > creatorGoal.progress) {
+              challenge.participantScore++
+              logger.log('p score', challenge.participantScore)
+            } else if (participantGoal.progress < creatorGoal.progress) {
+              challenge.creatorScore++
+              logger.log('c score', challenge.creatorScore)
+            }
+          } else if ((DateTime.fromISO(creatorGoal.endDate) < DateTime.local()) && !challenge.winner) {
+            if (challenge.creatorScore > challenge.participantScore) {
+              challenge.winner = creatorGoal.creatorId
+              challenge.loser = participantGoal.creatorId
+              api.put('/profile/' + creatorGoal.creatorId + '/challengesWon?challengesWon=1')
+              api.put('/profile/' + participantGoal.creatorId + '/challengesLost?challengesLost=1')
+            } else if (challenge.creatorScore < challenge.participantScore) {
+              challenge.loser = creatorGoal.creatorId
+              challenge.winner = participantGoal.creatorId
+              api.put('/profile/' + participantGoal.creatorId + '/challengesWon?challengesWon=1')
+              api.put('/profile/' + creatorGoal.creatorId + '/challengesLost?challengesLost=1')
+            }
           }
-        } else if ((DateTime.fromISO(creatorGoal.endDate) < DateTime.local()) && !challenge.winner) {
-          if (challenge.creatorScore > challenge.participantScore) {
-            challenge.winner = creatorGoal.creatorId
-            challenge.loser = participantGoal.creatorId
-            api.put('/profile/' + creatorGoal.creatorId + '/challengesWon?challengesWon=1')
-            api.put('/profile/' + participantGoal.creatorId + '/challengesLost?challengesLost=1')
-          } else if (challenge.creatorScore < challenge.participantScore) {
-            challenge.loser = creatorGoal.creatorId
-            challenge.winner = participantGoal.creatorId
-            api.put('/profile/' + participantGoal.creatorId + '/challengesWon?challengesWon=1')
-            api.put('/profile/' + creatorGoal.creatorId + '/challengesLost?challengesLost=1')
-          }
+          api.put('/api/challenges/' + challenge.id, challenge)
         }
-        api.put('/api/challenges/' + challenge.id, challenge)
       })
-      setTimeout(goalService.getGoals, 125)
       setTimeout(profileService.getAllProfiles, 125)
+      setTimeout(challengeService.getChallenges, 125)
       setTimeout(goalService.updateGoal, 125)
     } catch (error) {
       logger.error(error)
@@ -173,17 +176,6 @@ class ChallengeService {
       logger.error(error)
     }
   }
-
-  // async acceptChallenge(challengeId, body) {
-  //   try {
-  //     body.accepted = true
-  //     body.rejected = false
-  //     body.participantId = AppState.profile.id
-  //     await api.put('/api/challenges/' + challengeId, body)
-  //   } catch (error) {
-  //     logger.error(error)
-  //   }
-  // }
 
   async acceptChallenge(goal, challenge) {
     try {

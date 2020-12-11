@@ -6,13 +6,13 @@ export class GoalController extends BaseController {
   constructor() {
     super('api/goals')
     this.router
+      .put('', this.updateGoal)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getAll)
       .get('/:goalId', this.getActiveGoal)
       .post('', this.createGoal)
       .delete('/:goalId', this.deleteGoal)
       .put('/:goalId', this.editGoal)
-      .put('', this.updateGoal)
   }
 
   async getActiveGoal(req, res, next) {
