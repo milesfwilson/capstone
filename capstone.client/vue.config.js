@@ -1,6 +1,7 @@
 module.exports = {
  // NOTE to host on github publicPath: '/YOUR-GITHUB-REPOSITORY-NAME/',
-  publicPath: '/',
-  outputDir: 'docs',
+  // publicPath: '/',
+  outputDir: '../capstone.server/client',
+
   productionSourceMap: false
 }
