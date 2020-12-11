@@ -5,7 +5,7 @@
         <h3 class="text-center">
           Pending Challenges
         </h3>
-        <pendingChallengeComponent v-for="challenge in checkedChallenges" :key="challenge.id" :challenge-props="challenge" />
+        <pendingChallengeComponent v-for="challenge in challenges" :key="challenge.id" :challenge-props="challenge" />
       </div>
     </div>
 

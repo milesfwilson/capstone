@@ -25,8 +25,8 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   setBearer(AuthService.bearer)
   await profileService.getProfile()
   AppState.user = AuthService.user
-  await goalService.getGoals()
   await challengeService.getChallenges()
+  await goalService.getGoals()
   await profileService.getAllProfiles()
   // await goalService.updateGoal()
   await challengeService.updateChallengeScores()

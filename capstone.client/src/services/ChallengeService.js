@@ -9,9 +9,11 @@ class ChallengeService {
     try {
       const res = await api.get('/api/challenges')
       AppState.challenges = res.data
+      AppState.pending = res.data.filter(i => (AppState.profile.id === i.creatorId && !i.accepted && !i.rejected))
       logger.log('challenges', AppState.challenges)
-      this.pendingChallenge()
-      this.challengeCheck()
+      logger.log('pending', AppState.pending)
+      // this.pendingChallenge()
+      // this.challengeCheck()
     } catch (error) {
       logger.error(error)
     }
@@ -240,6 +242,18 @@ class ChallengeService {
       await api.put('/api/challenges/' + challengeId, body)
       logger.log(AppState.challenges)
       setTimeout(this.getChallenges, 125)
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+
+  async acceptedChallengeGoal(goal) {
+    try {
+      AppState.challenges.forEach(challenge => {
+        if (challenge.id === goal.challengeId) {
+          return challenge.accepted
+        }
+      })
     } catch (error) {
       logger.error(error)
     }
