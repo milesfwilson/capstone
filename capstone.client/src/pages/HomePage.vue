@@ -61,7 +61,7 @@
         <h1 class="header-text">
           A single <span class="text-moment"> m o m e n t </span>can change everything
         </h1>
-        <p>(Start by creating and account and loggin in)</p>
+        <p>(Start by creating an account and logging in)</p>
       </div>
     </div>
     <div class="col-12" v-show="((myGoals.length < 1) && profile.id)">
