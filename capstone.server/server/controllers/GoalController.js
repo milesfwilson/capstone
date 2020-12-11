@@ -13,7 +13,7 @@ export class GoalController extends BaseController {
       .delete('/:goalId', this.deleteGoal)
       .put('/:goalId', this.editGoal)
       .put('', this.updateGoal)
-  }
+git   }
 
   async getActiveGoal(req, res, next) {
     try {
