@@ -26,8 +26,8 @@
         <button class="btn btn-outline-light radius-25 ml-3" v-if="(challengeProps.creatorId == profile.id) && (challengeProps.accepted)" @click.prevent="deleteChallenge(challengeProps.id)">
           Delete
         </button>
-        <form @submit.prevent="renewChallenge(state.newGoal.endDate, findGoalByChallengeId(challengeProps.id))" class="d-flex" v-if="((challengeProps.creatorId == profile.id) && (challengeProps.accepted))">
-          <!-- <form @submit.prevent="renewChallenge(state.newGoal.endDate, findGoalByChallengeId(challengeProps.id))" class="d-flex" v-if="((challengeProps.creatorId == profile.id) && (challengeProps.accepted)) && (findGoalByChallengeId(challengeProps.id)[0].endDate.split('-').join('').split('T').splice(0,1).join('')) < (Number(date.split('-').join('')))"> -->
+        <!-- <form @submit.prevent="renewChallenge(state.newGoal.endDate, findGoalByChallengeId(challengeProps.id))" class="d-flex" v-if="((challengeProps.creatorId == profile.id) && (challengeProps.accepted))"> -->
+        <form @submit.prevent="renewChallenge(state.newGoal.endDate, findGoalByChallengeId(challengeProps.id))" class="d-flex" v-if="((challengeProps.creatorId == profile.id) && (challengeProps.accepted)) && (findGoalByChallengeId(challengeProps.id)[0].endDate.split('-').join('').split('T').splice(0,1).join('')) < (Number(date.split('-').join('')))">
           <button class="btn btn-outline-light radius-25 ml-3">
             Renew
           </button>
