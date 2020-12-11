@@ -5,9 +5,9 @@
     </div>
   </div> -->
 
-  <div class="goalComponent" v-if="(goalProps.creatorId == profile.id) && ((goalProps.category == sort || (goalProps.category== {} || sortByStatus == 'all')) || (goalProps.completed == sortByStatus || (goalProps.completed == {} || sortByStatus == 'all')))">
-    <div class="col-12">
-      <div class="row my-1">
+  <div class="goalComponent" v-if="(goalProps.creatorId == profile.id) && challenges.length > 0 && ((goalProps.category == sort || (goalProps.category== {} || sortByStatus == 'all')) || (goalProps.completed == sortByStatus || (goalProps.completed == {} || sortByStatus == 'all')))">
+    <div class="col-12" v-if="challenges.length > 0">
+      <div class="row my-1" v-if="acceptedChallengeGoal(challenges, goalProps)">
         <div class="col-10 d-flex">
           <div v-if="goalProps.counter" class="bg-light rounded mr-2 move-left align-self-center" :style="'width: 3px; height:'+ goalProps.progress/goalProps.counter*100+'%'">
           </div>
@@ -49,6 +49,29 @@
             <i class="far fa-trash-alt text-light"></i>
           </button>
         </div>
+        <div class="col-12">
+          <div class="row">
+            <div class="col-12 d-flex justify-content-around">
+              <div class="d-flex bg-light text-dark px-2 radius">
+                <i class="fa fa-clock-o my-auto" aria-hidden="true"></i>
+                <p class="my-auto pl-2">
+                  {{ goalDate(goalProps).toLowerCase() }}
+                </p>
+              </div>
+              <div class="d-flex bg-light text-dark px-2 radius" v-if="goalProps.recurring">
+                <i class="fa fa-calendar-o my-auto" aria-hidden="true"></i>
+                <p class="my-auto pl-2">
+                  every {{ goalProps.timeFrame }}
+                </p>
+              </div>
+              <div class="d-flex bg-light text-dark px-2 radius">
+                <i class="fa fa-circle-o my-auto" aria-hidden="true"></i> <p class="my-auto pl-2">
+                  {{ goalProps.category }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -56,9 +79,11 @@
 
 <script>
 import { goalService } from '../services/GoalService'
+// import { challengeService } from '../services/ChallengeService'
 import { computed } from 'vue'
 import { AppState } from '../AppState'
 import swal from 'sweetalert'
+import { DateTime } from 'luxon'
 // import EditGoalComponent from '../components/EditGoalComponent'
 export default {
   name: 'GoalComponent',
@@ -99,7 +124,23 @@ export default {
       },
       decrement(id, goal) {
         goalService.decrement(id, goal)
+      },
+      acceptedChallengeGoal(challenges, goalProps) {
+        if (goalProps.challengeId) {
+          for (let i = 0; i < challenges.length; i++) {
+            if (challenges[i].id === goalProps.challengeId) {
+              return challenges[i].accepted
+            }
+          }
+        } else if (!goalProps.challengeId) {
+          return true
+        }
+        // challengeService.acceptedChallengeGoal(goalProps)
+      },
+      goalDate(goal) {
+        return DateTime.fromISO(goal.endDate).toFormat('DDDD')
       }
+
     }
   },
   components: { }
