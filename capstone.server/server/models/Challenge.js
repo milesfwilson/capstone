@@ -17,8 +17,6 @@ const Challenge = new Schema(
     loser: { },
     participantScore: { type: Number, default: 0 },
     creatorScore: { type: Number, default: 0 }
-    // wager: { type: String, required: true },
-
   },
 
   { timestamps: true, toJSON: { virtuals: true } }

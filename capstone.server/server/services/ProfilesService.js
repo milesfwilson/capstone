@@ -1,6 +1,7 @@
 import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
 import Profile from '../models/Profile'
+import { logger } from "../utils/Logger"
 
 // Private Methods
 
@@ -82,15 +83,15 @@ class ProfileService {
   }
 
   async completed(id, query) {
-    if (query.completed != 1) {
-      throw new BadRequest('no')
+    if (query.failures < 1) {
+      logger.log('up to date')
     }
     return await dbContext.Profile.findByIdAndUpdate(id, { $inc: { completed: query.completed } }, { new: true }).populate('profile')
   }
 
   async fail(id, query) {
-    if (query.failures != 1) {
-      throw new BadRequest('no')
+    if (query.failures < 1) {
+      logger.log('up to date')
     }
     return await dbContext.Profile.findByIdAndUpdate(id, { $inc: { failures: query.failures } }, { new: true }).populate('profile')
   }

@@ -37,10 +37,6 @@ class GoalService {
     } else {
       return await dbContext.Goals.findByIdAndUpdate(goalId, newGoal, { new: true })
     }
-
-  // } else if ((exists._doc.creatorId === userId)) {
-  //   return await dbContext.Goals.findByIdAndUpdate(goalId, newGoal, { new: true })
-  // }
   }
 }
 
