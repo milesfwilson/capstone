@@ -90,7 +90,9 @@ class GoalService {
   async updateGoal() {
     try {
       const now = await DateTime.local()
-      AppState.goals.forEach(async g => {
+
+      for (let i = 0; i < AppState.goals.length; i++) {
+        const g = AppState.goals[i]
         const skippedDays = (now.diff(DateTime.fromISO(g.startDate), 'days'))
         const skippedWeeks = (now.diff(DateTime.fromISO(g.startDate), 'weeks'))
         const skippedMonths = (now.diff(DateTime.fromISO(g.startDate), 'months'))
@@ -129,7 +131,7 @@ class GoalService {
             await api.put('/profile/' + g.creatorId + `/failures?failures=${Math.floor(skippedYears.values.years)}`)
           }
         }
-      })
+      }
       setTimeout(this.getGoals, 1000)
     } catch (error) {
       logger.error(error)

@@ -63,7 +63,7 @@ class ChallengeService {
       })
       setTimeout(profileService.getAllProfiles, 125)
       setTimeout(challengeService.getChallenges, 125)
-      setTimeout(goalService.updateGoal, 125)
+      setTimeout(goalService.updateGoal, 2000)
     } catch (error) {
       logger.error(error)
     }

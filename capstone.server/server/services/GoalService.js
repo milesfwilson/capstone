@@ -1,6 +1,6 @@
 import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
-import { logger } from '../utils/Logger'
+// import { logger } from '../utils/Logger'
 
 class GoalService {
   async getGoalsByChallengeId(id) {
@@ -29,7 +29,7 @@ class GoalService {
     }
   }
 
-  async editGoal(goalId, newGoal, userId) {
+  async editGoal(goalId, newGoal) {
     const exists = await dbContext.Goals.findById(goalId)
     if (!exists) {
       throw new BadRequest('This goal does not exist')
