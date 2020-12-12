@@ -2,6 +2,20 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
 
 class ChallengeService {
+  async participantScore(id, query) {
+    if (query.participantScore != 1) {
+      throw new BadRequest('participantScore updated')
+    }
+    return await dbContext.Challenges.findByIdAndUpdate(id, { $inc: { participantScore: query.participantScore } }, { new: true })
+  }
+
+  async creatorScore(id, query) {
+    if (query.creatorScore != 1) {
+      throw new BadRequest('creatorScore updated')
+    }
+    return await dbContext.Challenges.findByIdAndUpdate(id, { $inc: { creatorScore: query.creatorScore } }, { new: true })
+  }
+
   async getAll(query = {}) {
     return await dbContext.Challenges.find(query).populate('Profile')
   }

@@ -23,6 +23,8 @@ class ChallengeService {
     try {
       let creatorGoal = {}
       let participantGoal = {}
+      // const now = DateTime.local()
+      const shortNow = DateTime.DATE_SHORT
       AppState.challenges.forEach(challenge => {
         AppState.goals.forEach(goal => {
           // let timeFrame = goal.timeFrame
@@ -36,16 +38,16 @@ class ChallengeService {
           }
         })
         // NOTE check to see if inside time frame,
-        if (DateTime.fromISO(creatorGoal.startDate) < DateTime.local()) {
-          if ((((DateTime.fromISO && (creatorGoal.endDate) > DateTime.local())) && !challenge.winner)) {
+        if (DateTime.fromISO(creatorGoal.startDate) < shortNow) {
+          if ((((DateTime.fromISO(creatorGoal.endDate) > shortNow)) && !challenge.winner)) {
             if (participantGoal.progress > creatorGoal.progress) {
-              challenge.participantScore++
+              api.put('/api/challenges/' + challenge.id + '/participantScore?participantScore=1')
               logger.log('p score', challenge.participantScore)
             } else if (participantGoal.progress < creatorGoal.progress) {
-              challenge.creatorScore++
+              api.put('/api/challenges/' + challenge.id + '/creatorScore?creatorScore=1')
               logger.log('c score', challenge.creatorScore)
             }
-          } else if ((DateTime.fromISO(creatorGoal.endDate) < DateTime.local()) && !challenge.winner) {
+          } else if ((DateTime.fromISO(creatorGoal.endDate) < shortNow) && !challenge.winner) {
             if (challenge.creatorScore > challenge.participantScore) {
               challenge.winner = creatorGoal.creatorId
               challenge.loser = participantGoal.creatorId
@@ -63,7 +65,7 @@ class ChallengeService {
       })
       setTimeout(profileService.getAllProfiles, 125)
       setTimeout(challengeService.getChallenges, 125)
-      setTimeout(goalService.updateGoal, 2000)
+      goalService.updateGoal()
     } catch (error) {
       logger.error(error)
     }

@@ -7,6 +7,8 @@ export class ChallengeController extends BaseController {
   constructor() {
     super('api/challenges')
     this.router
+      .put('/:challengeId/creatorScore', this.creatorScore)
+      .put('/:challengeId/participantScore', this.participantScore)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getAll)
       .get('/:challengeId', this.getActiveChallenge)
@@ -14,6 +16,22 @@ export class ChallengeController extends BaseController {
       .delete('/:challengeId', this.deleteChallenge)
       .put('/:challengeId', this.edit)
       .get('/:challengeId/goals', this.getGoalsByChallengeId)
+  }
+
+  async creatorScore(req, res, next) {
+    try {
+      res.send(await challengeService.creatorScore(req.params.challengeId, req.query))
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  async participantScore(req, res, next) {
+    try {
+      res.send(await challengeService.participantScore(req.params.challengeId, req.query))
+    } catch (err) {
+      next(err)
+    }
   }
 
   async getGoalsByChallengeId(req, res, next) {
