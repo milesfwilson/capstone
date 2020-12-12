@@ -1,6 +1,6 @@
 <template>
-  <div class="goalGraphComponent align-self-end" :style="'width:' + 1 / myGoals.length * 100 + 'px'" v-if="(!goalProps.completed &&(goalProps.timeFrame && ((goalProps.timeFrame == sortByTimeFrame))))">
-    <div v-if="(goalProps.timeFrame && ((goalProps.timeFrame == sortByTimeFrame)))" class="bg-success graph grow" :style="'height:' + goalProps.progress / goalProps.counter * 100 + 'px'">
+  <div class="goalGraphComponent align-self-end" :style="'width:' + 1 / myGoals.length * 100 + 'px'" v-if="((goalProps.timeFrame && ((goalProps.timeFrame == sortByTimeFrame))))">
+    <div v-if="(goalProps.timeFrame && ((goalProps.timeFrame == sortByTimeFrame)))" class="gradient-progress graph grow" :style="'height:' + goalProps.progress / goalProps.counter * 100 + 'px'" @mouseover="showDetails(goalProps)">
     </div>
   </div>
 </template>
@@ -14,7 +14,10 @@ export default {
   setup() {
     return {
       sortByTimeFrame: computed(() => AppState.sortByTimeFrame),
-      myGoals: computed(() => AppState.myGoals)
+      myGoals: computed(() => AppState.myGoals),
+      showDetails(goalProps) {
+        AppState.activeGoal = goalProps
+      }
     }
   },
   components: {}
@@ -23,7 +26,7 @@ export default {
 
 <style lang="scss" scoped>
 .graph {
-  width: 80%;
+  width: 20px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }

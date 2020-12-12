@@ -33,7 +33,13 @@
       <h4 class="my-2">
         What is your goal?
       </h4>
-      <input type="text" id="goalTitle" class="form-control my-2 bg-transparent border border-0 text-light" placeholder="Enter goal" v-model="state.newGoal.title">
+      <input type="text"
+             id="goalTitle"
+             class="form-control my-2 bg-transparent border border-0 text-light"
+             placeholder="Enter goal"
+             v-model="state.newGoal.title"
+             required
+      >
       <h4 class="my-2">
         What is your start date?
       </h4>

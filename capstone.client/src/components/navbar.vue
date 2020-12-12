@@ -4,11 +4,6 @@
       <p class="header-font">
         m o m e n t
       </p>
-      <div class="d-flex bg-circle ml-2 text-center" v-if="pending.length > 0">
-        <h6 class="text-light m-auto">
-          {{ pending.length }}
-        </h6>
-      </div>
     </router-link>
   </nav>
 </template>

@@ -1,13 +1,13 @@
 <template>
-  <div class="challengeComponent row mb-3" v-if="(challengeProps.accepted == true) && (challengeProps.participantId == profile.id || challengeProps.creatorId == profile.id) ">
+  <div class="challengeComponent row mb-3" v-if="(challengeProps.accepted == true) && (challengeProps.participantId == profile.id || challengeProps.creatorId == profile.id) && challengeHasGoal(challengeProps.id)">
     <div class="col-12 ">
-      <div class="radius-25 bg-light text-dark p-2 my-1 text-center">
+      <div class="radius-25 gradient-light text-dark p-2 my-1 text-center">
         <!-- <img :src="challengeProps.participantImg" height="50" class="rounded-circle mr-auto" alt=""> -->
         <h4 class="my-auto">
           {{ challengeProps.title }}
         </h4>
         <h3 class="my-auto text-muted">
-          {{ findGoalByChallengeId(challengeProps.id)[0].title }}
+          {{ findGoalByChallengeId(challengeProps.id).title }}
         </h3>
         <!-- <img :src="challengeProps.creatorImg" height="50" class="ml-auto rounded-circle" alt=""> -->
 
@@ -27,7 +27,7 @@
           Delete
         </button>
         <!-- <form @submit.prevent="renewChallenge(state.newGoal.endDate, findGoalByChallengeId(challengeProps.id))" class="d-flex" v-if="((challengeProps.creatorId == profile.id) && (challengeProps.accepted))"> -->
-        <form @submit.prevent="renewChallenge(state.newGoal.endDate, findGoalByChallengeId(challengeProps.id))" class="d-flex" v-if="((challengeProps.creatorId == profile.id) && (challengeProps.accepted)) && (findGoalByChallengeId(challengeProps.id)[0].endDate.split('-').join('').split('T').splice(0,1).join('')) < (Number(date.split('-').join('')))">
+        <form @submit.prevent="renewChallenge(state.newGoal.endDate, findGoalByChallengeId(challengeProps.id))" class="d-flex" v-if="((challengeProps.creatorId == profile.id) && (challengeProps.accepted)) && (findGoalByChallengeId(challengeProps.id).endDate.split('-').join('').split('T').splice(0,1).join('')) < (Number(date.split('-').join('')))">
           <button class="btn btn-outline-light radius-25 ml-3">
             Renew
           </button>
@@ -73,6 +73,8 @@ export default {
       profile: computed(() => AppState.profile),
       goals: computed(() => AppState.goals),
       date: computed(() => AppState.date),
+      challenges: computed(() => AppState.challenges),
+
       leaveChallenge(id, challenge) {
         swal({
           title: 'Are you sure?',
@@ -104,10 +106,24 @@ export default {
         challengeService.deleteChallenge(id)
       },
       findGoalByChallengeId(id) {
-        return AppState.goals.filter(goal => (goal.challengeId === id))
+        for (let i = 0; i < AppState.goals.length; i++) {
+          if (AppState.goals[i].challengeId === id) {
+            return AppState.goals[i]
+          }
+        }
       },
       renewChallenge(body, goals) {
         goalService.renewChallenge(state.newGoal, goals)
+      },
+      challengeHasGoal(id) {
+        for (let i = 0; i < AppState.goals.length; i++) {
+          if (AppState.goals[i].challengeId) {
+            if (AppState.goals[i].challengeId === id) {
+              return true
+            }
+          }
+        }
+        return false
       }
     }
   },

@@ -2,7 +2,7 @@
   <div class="minimalNavComponent">
     <div class="row">
       <div class="col-12">
-        <div class="radius p-2 shadow-lg border-height ">
+        <div class="">
           <div class="d-flex text-dark shadow-lg opacity radius justify-content-between p-3">
             <router-link class="text-dark" :to="{ name: 'Home' }">
               <i class="fa fa-home text-dark fa-2x grow" aria-hidden="true"></i>

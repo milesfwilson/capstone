@@ -5,19 +5,49 @@
         <div class="row" v-if="profile.picture">
           <div class="col-12">
             <div class="">
-              <img class="rounded-circle" height="150" :src="profile.picture" alt="" />
-              <div class="d-flex">
-                <div :style="'width: ' + Math.ceil((profile.failures) / (profile.completed + profile.failures) * 100) + 'px; height: 100px'" class="bg-danger"></div>
-                <div :style="'width: ' + Math.floor((profile.completed) / (profile.completed + profile.failures) * 100) + 'px; height: 100px'" class="bg-success"></div>
+              <div class="row">
+                <div class="col-6">
+                  <div class="m-2">
+                    <img class="rounded-circle img-fluid grow" height="150" :src="profile.picture" alt="" />
+                  </div>
+                  <h3 class="text-center text-light">
+                    {{ profile.email.split('@').splice(0,1).join('') }}
+                  </h3>
+                </div>
+
+                <div class="col-6 d-flex flex-column justify-content-center">
+                  <transition name="route" mode="out-in">
+                    <div class="text-center text-dark gradient-light rounded p-2 shadow"
+                         v-if="activeGoal.title"
+                    >
+                      <h3 class="">
+                        {{ activeGoal.title }}
+                      </h3>
+                      <p class="">
+                        {{ activeGoal.progress }} / {{ activeGoal.counter }}
+                      </p>
+                      <p>
+                        Per {{ activeGoal.timeFrame }}
+                      </p>
+                      <p>
+                        {{ goalDate(activeGoal) }}
+                      </p>
+                    </div>
+                  </transition>
+                </div>
+              </div>
+              <div class="d-flex my-5 grow">
+                <div :style="'width: ' + Math.floor((profile.completed) / (profile.completed + profile.failures) * 100) + '%; height: 20px'" class="gradient-progress completed"></div>
+                <div :style="'width: ' + Math.ceil((profile.failures) / (profile.completed + profile.failures) * 100) + '%; height: 20px'" class="gradient-failure failures"></div>
               </div>
             </div>
-
-            <h3 class="text-center text-light">
-              {{ profile.email.split('@').splice(0,1).join('') }}
-            </h3>
           </div>
         </div>
-        <div class="row mt-3 height">
+        <div class="row">
+          <div class="col-12">
+          </div>
+        </div>
+        <div class="row my-3 pt-5 height gradient-light" @mouseleave="revert">
           <div class="col-12 d-flex">
             <goalGraphComponent v-for="goal in myGoals" :key="goal.id" :goal-props="goal" class="d-flex w-100 justify-content-around" />
           </div>
@@ -63,8 +93,8 @@
         <div class="row text-light">
           <div class="col-12">
             <div v-for="goal in myGoals" :key="goal.id">
-              <div class="row" v-if="(!goal.completed && (goal.timeFrame == sortByTimeFrame))">
-                <h3 class="ml-5">
+              <div class="row" v-if="(goal.timeFrame && (goal.timeFrame == sortByTimeFrame) && goalHasAcceptedChallenge (goal, challenges))">
+                <h3 class="ml-5" :class="{'text-muted': goal.completed}">
                   {{ goal.title }}
                 </h3>
               </div>
@@ -81,6 +111,7 @@ import { computed } from 'vue'
 import { AppState } from '../AppState'
 import goalGraphComponent from '../components/GoalGraphComponent'
 import { AuthService } from '../services/AuthService'
+import { DateTime } from 'luxon'
 export default {
   components: { goalGraphComponent },
   name: 'Profile',
@@ -90,12 +121,33 @@ export default {
       activeGoals: computed(() => AppState.goals),
       myGoals: computed(() => AppState.myGoals),
       sortByTimeFrame: computed(() => AppState.sortByTimeFrame),
+      activeGoal: computed(() => AppState.activeGoal),
+      challenges: computed(() => AppState.challenges),
       sort(value) {
         AppState.sortByTimeFrame = value
         console.log(AppState.sortByTimeFrame)
       },
+      revert() {
+        AppState.activeGoal = {}
+      },
       async logout() {
         await AuthService.logout({ returnTo: window.location.origin })
+      },
+      goalDate(goal) {
+        if (goal.endDate) {
+          return DateTime.fromISO(goal.endDate).toFormat('DDDD')
+        }
+      },
+      goalHasAcceptedChallenge(goal, challenges) {
+        if (goal.challengeId) {
+          for (let i = 0; i < challenges.length; i++) {
+            if (goal.challengeId === challenges[i].id && challenges[i].accepted) {
+              return true
+            }
+          }
+          return false
+        }
+        return true
       }
 
     }
@@ -106,7 +158,16 @@ export default {
 <style scoped>
 
 .height{
-  height: 100px;
+  height: 150px;
 }
 
+.completed {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+}
+.failures {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
 </style>

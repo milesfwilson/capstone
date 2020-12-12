@@ -6,7 +6,7 @@
           <label for="waitingFor" class="ml-auto" v-if="challengeProps.rejected==false && challengeProps.accepted==false && challengeProps.creatorId == profile.id">Waiting for:</label>
         </div>
       </div> -->
-      <div class="d-flex radius-25 bg-light text-dark p-2 my-1">
+      <div class="d-flex radius-25 gradient-light text-dark p-2 my-1">
         <img :src="challengeProps.creatorImg" height="50" class="mr-auto rounded-circle" id="waitingFor" alt="">
         <div class="text-center">
           <h4 class="my-auto">
