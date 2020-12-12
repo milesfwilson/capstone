@@ -9,7 +9,7 @@ class ChallengeService {
     try {
       const res = await api.get('/api/challenges')
       AppState.challenges = res.data
-      AppState.pending = res.data.filter(i => (AppState.profile.id === i.creatorId && !i.accepted && !i.rejected))
+      AppState.pending = res.data.filter(i => (AppState.profile.id === i.participantId && !i.accepted && !i.rejected))
       logger.log('challenges', AppState.challenges)
       logger.log('pending', AppState.pending)
       // this.pendingChallenge()

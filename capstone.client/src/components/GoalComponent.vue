@@ -5,9 +5,9 @@
     </div>
   </div> -->
 
-  <div class="goalComponent" v-if="(goalProps.creatorId == profile.id) && challenges.length > 0 && ((goalProps.category == sort || (goalProps.category== {} || sortByStatus == 'all')) || (goalProps.completed == sortByStatus || (goalProps.completed == {} || sortByStatus == 'all')))">
-    <div class="col-12" v-if="challenges.length > 0">
-      <div class="row my-1" v-if="acceptedChallengeGoal(challenges, goalProps)">
+  <div class="goalComponent" v-if="(goalProps.creatorId == profile.id) && acceptedChallengeGoal(challenges, goalProps) && ((goalProps.category == sort || (goalProps.category== {} || sortByStatus == 'all')) || (goalProps.completed == sortByStatus || (goalProps.completed == {} || sortByStatus == 'all')))">
+    <div class="col-12">
+      <div class="row my-1">
         <div class="col-10 d-flex">
           <div v-if="goalProps.counter" class="bg-light rounded mr-2 move-left align-self-center" :style="'width: 3px; height:'+ goalProps.progress/goalProps.counter*100+'%'">
           </div>
@@ -132,6 +132,7 @@ export default {
               return challenges[i].accepted
             }
           }
+          return true
         } else if (!goalProps.challengeId) {
           return true
         }
