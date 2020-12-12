@@ -60,8 +60,8 @@ export class GoalController extends BaseController {
 
   async updateGoal(req, res, next) {
     try {
-      const userId = req.userInfo.id
-      res.send(await goalService.editGoal(userId))
+      // const userId = req.userInfo.id
+      res.send(await goalService.editGoal())
     } catch (error) {
       next(error)
     }
