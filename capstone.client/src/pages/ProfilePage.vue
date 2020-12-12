@@ -125,7 +125,6 @@ export default {
       challenges: computed(() => AppState.challenges),
       sort(value) {
         AppState.sortByTimeFrame = value
-        console.log(AppState.sortByTimeFrame)
       },
       revert() {
         AppState.activeGoal = {}

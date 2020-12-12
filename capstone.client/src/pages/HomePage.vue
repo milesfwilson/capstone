@@ -137,12 +137,10 @@ export default {
       sort(value) {
         AppState.sort = value
         AppState.sortByStatus = {}
-        console.log(AppState.sort)
       },
       sortByStatus(value) {
         AppState.sortByStatus = value
         AppState.sort = {}
-        console.log(AppState.sortByStatus)
       }
     }
   }
