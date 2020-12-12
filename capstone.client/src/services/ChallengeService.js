@@ -202,6 +202,11 @@ class ChallengeService {
         newGoal.startDate = goal.startDate
       }
 
+      if (goal.recurring) {
+        newGoal.recurring = goal.recurring
+        newGoal.timeFrame = goal.timeFrame
+      }
+
       challenge.accepted = true
       challenge.rejected = false
       await api.put('/api/challenges/' + challenge.id, challenge)
