@@ -10,7 +10,7 @@ class GoalService {
       const res = await api.get('/api/goals')
       AppState.goals = res.data
       AppState.myGoals = res.data.filter(i => (AppState.profile.id === i.creatorId))
-      logger.log(AppState.goals)
+      logger.log('goals', AppState.goals)
     } catch (error) {
       logger.error(error)
     }
@@ -90,6 +90,7 @@ class GoalService {
   async updateGoal() {
     try {
       const now = await DateTime.local()
+      const shortNow = await DateTime.DATE_SHORT
 
       for (let i = 0; i < AppState.goals.length; i++) {
         const g = AppState.goals[i]
@@ -98,7 +99,7 @@ class GoalService {
         const skippedMonths = (now.diff(DateTime.fromISO(g.startDate), 'months'))
         const skippedYears = (now.diff(DateTime.fromISO(g.startDate), 'years'))
 
-        if (DateTime.fromISO(g.startDate) < now && g.timeFrame === 'day' && DateTime.fromISO(g.endDate) > now && g.creatorId === AppState.profile.id && g.recurring) {
+        if (DateTime.fromISO(g.startDate) < shortNow && g.timeFrame === 'day' && DateTime.fromISO(g.endDate) > shortNow && g.recurring) {
           if (g.progress === g.counter) {
             await api.put('/api/goals/' + g._id, { progress: 0, completed: false, startDate: DateTime.fromISO(g.startDate).plus({ day: 1 }) })
             await api.put('/profile/' + g.creatorId + '/completed?completed=1')
@@ -106,7 +107,7 @@ class GoalService {
             await api.put('/api/goals/' + g._id, { progress: 0, completed: false, startDate: DateTime.fromISO(g.startDate).plus({ day: Math.floor(skippedDays.values.days) }) })
             await api.put('/profile/' + g.creatorId + `/failures?failures=${Math.floor(skippedDays.values.days)}`)
           }
-        } else if (DateTime.fromISO(g.startDate) < now && g.timeFrame === 'week' && DateTime.fromISO(g.endDate) > now && g.creatorId === AppState.profile.id && g.recurring) {
+        } else if (DateTime.fromISO(g.startDate) < shortNow && g.timeFrame === 'week' && DateTime.fromISO(g.endDate) > shortNow && g.recurring) {
           if (g.progress === g.counter) {
             await api.put('/api/goals/' + g._id, { progress: 0, completed: false, startDate: DateTime.fromISO(g.startDate).plus({ week: 1 }) })
             await api.put('/profile/' + g.creatorId + '/completed?completed=1')
@@ -114,7 +115,7 @@ class GoalService {
             await api.put('/api/goals/' + g._id, { progress: 0, completed: false, startDate: DateTime.fromISO(g.startDate).plus({ week: Math.floor(skippedWeeks.values.weeks) }) })
             await api.put('/profile/' + g.creatorId + `/failures?failures=${Math.floor(skippedWeeks.values.weeks)}`)
           }
-        } else if (DateTime.fromISO(g.startDate) < now && g.timeFrame === 'month' && DateTime.fromISO(g.endDate) > now && g.creatorId === AppState.profile.id && g.recurring) {
+        } else if (DateTime.fromISO(g.startDate) < shortNow && g.timeFrame === 'month' && DateTime.fromISO(g.endDate) > shortNow && g.recurring) {
           if (g.progress === g.counter) {
             await api.put('/api/goals/' + g._id, { progress: 0, completed: false, startDate: DateTime.fromISO(g.startDate).plus({ month: 1 }) })
             await api.put('/profile/' + g.creatorId + '/completed?completed=1')
@@ -122,7 +123,7 @@ class GoalService {
             await api.put('/api/goals/' + g._id, { progress: 0, completed: false, startDate: DateTime.fromISO(g.startDate).plus({ month: Math.floor(skippedMonths.values.months) }) })
             await api.put('/profile/' + g.creatorId + `/failures?failures=${Math.floor(skippedMonths.values.months)}`)
           }
-        } else if (DateTime.fromISO(g.startDate) < now && g.timeFrame === 'year' && DateTime.fromISO(g.endDate) > now && g.creatorId === AppState.profile.id && g.recurring) {
+        } else if (DateTime.fromISO(g.startDate) < shortNow && g.timeFrame === 'year' && DateTime.fromISO(g.endDate) > shortNow && g.recurring) {
           if (g.progress === g.counter) {
             await api.put('/api/goals/' + g._id, { progress: 0, completed: false, startDate: DateTime.fromISO(g.startDate).plus({ year: 1 }) })
             await api.put('/profile/' + g.creatorId + '/completed?completed=1')

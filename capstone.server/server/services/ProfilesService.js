@@ -84,14 +84,14 @@ class ProfileService {
 
   async completed(id, query) {
     if (query.failures < 1) {
-      logger.log('up to date')
+      logger.log('completed up to date')
     }
     return await dbContext.Profile.findByIdAndUpdate(id, { $inc: { completed: query.completed } }, { new: true }).populate('profile')
   }
 
   async fail(id, query) {
     if (query.failures < 1) {
-      logger.log('up to date')
+      logger.log('failures up to date')
     }
     return await dbContext.Profile.findByIdAndUpdate(id, { $inc: { failures: query.failures } }, { new: true }).populate('profile')
   }

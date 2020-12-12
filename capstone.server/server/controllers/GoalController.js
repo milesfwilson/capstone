@@ -7,8 +7,8 @@ export class GoalController extends BaseController {
     super('api/goals')
     this.router
       .put('', this.updateGoal)
-      .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getAll)
+      .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/:goalId', this.getActiveGoal)
       .post('', this.createGoal)
       .delete('/:goalId', this.deleteGoal)
